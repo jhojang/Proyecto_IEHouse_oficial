@@ -12,3 +12,5 @@ Route::get('/api/show-token', function() {
 
 Route::post('/api/register', 'UserController@register');
 Route::post('/api/login', 'UserController@login');
+Route::post('/user/granted-access', 'UserController@grantedAccess');
+Route::post('/user/update', 'UserController@update');

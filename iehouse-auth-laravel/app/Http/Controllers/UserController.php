@@ -65,17 +65,54 @@ class UserController extends Controller
             ];
         }
         
-
-        
-
-        
-
-        
-
         return response()->json($data, $data['code']);
     }
 
     public function login (Request $request) {
-        return "Método login";
+
+        $jwtAuth = new \JwtAuth();
+        // Recibir datos por post
+        $json = $request->input('json', null);
+        $params = json_decode($json);
+        $params_array = json_decode($json, true);
+
+
+        // Validar esos datos
+        $validate = \Validator::make($params_array, [
+            'userOrEmail' => 'required',
+            'password' => 'required'
+        ]);
+
+        if ($validate->fails()) {
+            $signin = [
+                'status' => 'error',
+                'code' => 404,
+                'message' => 'El usuario no ha sido creado',
+                'error' => $validate->errors()
+            ];
+        } else {
+            // Cifrar el password
+            $passHash = hash('sha256', $params->password);
+            $signin = $jwtAuth->signin($params->userOrEmail, $passHash);
+
+            if (!empty($params->getToken)) {
+                $signin = $jwtAuth->signin($params->userOrEmail, $passHash, true);
+            }
+        }
+        
+        // Devolver token o datos
+        return response()->json($signin, 200);
+    }
+
+    
+
+    public function grantedAccess(Request $request) {
+
+        $token = $request->header('Authorization');
+        $jwtAuth = new \JwtAuth();
+        $checkToken = $jwtAuth->checkToken($token, true);
+
+        return response()->json($checkToken);
+
     }
 }
