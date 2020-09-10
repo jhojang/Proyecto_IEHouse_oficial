@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 export const useFetchUser = (action) => {
     // const [user, setUser] = useState({
@@ -115,7 +115,7 @@ export const useFetchUser = (action) => {
 
     }
 
-    const handleLogin = (json, setValidator, login_form) => {
+    const handleLogin = (json, setValidator, login_form, setLoggedIn) => {
         const formData = new FormData();
 
         formData.append('json', JSON.stringify(json));
@@ -163,15 +163,38 @@ export const useFetchUser = (action) => {
                 alert('Usuario o contraseña incorrectos');
             } else {
                 localStorage.setItem('token', JSON.stringify(data));
+                setLoggedIn(true);
                 login_form.reset();
             }
         });
     }
 
+    // const handleGrantedAccess = (token, setUser) => {
+    //     console.log(token);
+
+    //     fetch('http://iehouse-auth-laravel.test/api/granted-access', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type' : 'application/x-www-form-urlencoded',
+    //             'Authorization': token
+    //         }
+    //     })
+    //     .then(resp => resp.json())
+    //     .then(data => {
+    //         setUser({
+    //             user: data,
+    //             session: true
+    //         });
+    //         console.log(data);
+    //     })
+
+    // }
+
     return {
         respStatus: respStatus,
         handleCreate: handleCreate,
         handleLogin: handleLogin,
+        // handleGrantedAccess: handleGrantedAccess,
         traerCsrfToken: traerCsrfToken
     };
 
