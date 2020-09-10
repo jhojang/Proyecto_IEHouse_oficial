@@ -30,7 +30,6 @@ export const useFetchUser = (action) => {
         const formData = new FormData();
 
         formData.append('json', JSON.stringify(json));
-        console.log(...formData);
         fetch('http://iehouse-auth-laravel.test/api/' + action, {
             method: 'POST',
             body: formData,
@@ -78,7 +77,7 @@ export const useFetchUser = (action) => {
                         } else if (value[0] === 'The password field is required.'){
                             errores = {
                                 ...errores,
-                                [key]: 'El contraseña es requerido'
+                                [key]: 'La contraseña es requerido'
                             }
                         } else if (value[0] === 'The username has already been taken.'){
                             errores = {
@@ -105,10 +104,10 @@ export const useFetchUser = (action) => {
                     }));
             } else if (data.status === 'success') {
                 alert('Usuario registrado exitosamente');
-                setValidator(({
+                setValidator({
                     errores,
                     show: false
-                }));
+                });
                 register_form.reset();
             }
             
@@ -116,9 +115,63 @@ export const useFetchUser = (action) => {
 
     }
 
+    const handleLogin = (json, setValidator, login_form) => {
+        const formData = new FormData();
+
+        formData.append('json', JSON.stringify(json));
+        fetch('http://iehouse-auth-laravel.test/api/' + action, {
+            method: 'POST',
+            body: formData,
+            header: {
+                // 'X-CSRF-TOKEN': csrfToken,
+                'Content-Type' : 'application/x-www-form-urlencoded'
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            let errores = {
+                userOrEmail: '',
+                password: ''
+            }
+            if (data.message === 'El usuario no ha sido creado') {
+
+                for (let [key, value] of Object.entries(data.error)) {
+                    if (value[0] === 'The user or email field is required.') {
+                        errores = {
+                            ...errores,
+                            [key]: 'Usuario o email requerido'
+                        }
+                    } else if (value[0] === 'The password field is required.') {
+                        errores = {
+                            ...errores,
+                            [key]: 'La contraseña es requerida'
+                        }
+                    } else {
+                        errores = {
+                            ...errores,
+                            [key]: value[0]
+                        }
+                    }
+                }
+                
+                setValidator({
+                    errores,
+                    show: true
+                });
+
+            } else if (data.message === 'Login incorrecto') {
+                alert('Usuario o contraseña incorrectos');
+            } else {
+                localStorage.setItem('token', JSON.stringify(data));
+                login_form.reset();
+            }
+        });
+    }
+
     return {
         respStatus: respStatus,
         handleCreate: handleCreate,
+        handleLogin: handleLogin,
         traerCsrfToken: traerCsrfToken
     };
 
