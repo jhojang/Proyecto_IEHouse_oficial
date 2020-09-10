@@ -84,7 +84,13 @@ class JwtAuth {
         }
 
         if ($getIdentity) {
-            return $decoded;
+            $data = [
+                'status' => 'success',
+                'code' => 200,
+                'message' => 'Usuario identificado',
+                'user:' => $decoded
+            ];
+            return $data;
         }
 
         return $auth;

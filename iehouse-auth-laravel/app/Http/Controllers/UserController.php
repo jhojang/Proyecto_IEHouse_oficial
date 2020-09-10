@@ -166,6 +166,7 @@ class UserController extends Controller
         $token = $request->header('Authorization');
         $jwtAuth = new \JwtAuth();
         $checkToken = $jwtAuth->checkToken($token, true);
+        
 
         return response()->json($checkToken);
 
