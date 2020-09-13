@@ -3,6 +3,7 @@ import loginVector from '../../svg/loginVector.svg';
 import { useFetchUser } from '../../Hooks/useFetchUser';
 import { LoginForm } from '../Molecules/LoginForm';
 import { Redirect } from 'react-router-dom';
+import { useUser } from '../../Hooks/useUser';
 
 export const LoginScreen = () => {
 
@@ -32,14 +33,14 @@ export const LoginScreen = () => {
     }
 
     if (loggedIn === true) {
-        return <Redirect to='/home' />
+        return <Redirect to='/account' />
     }
 
     return (
         
         <div className="bg-primary">
             <div className="vh-100 d-flex align-items-center pl-5">
-                    <LoginForm handleSubmit={handleSubmit} validator={validator} />
+            <LoginForm handleSubmit={handleSubmit} validator={validator} />
                 <div className="col-1">
 
                 </div>

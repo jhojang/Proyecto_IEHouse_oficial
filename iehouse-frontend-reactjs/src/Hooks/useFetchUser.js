@@ -169,32 +169,33 @@ export const useFetchUser = (action) => {
         });
     }
 
-    // const handleGrantedAccess = (token, setUser) => {
-    //     console.log(token);
+    const handleGrantedAccess = (token, setUser) => {
 
-    //     fetch('http://iehouse-auth-laravel.test/api/granted-access', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type' : 'application/x-www-form-urlencoded',
-    //             'Authorization': token
-    //         }
-    //     })
-    //     .then(resp => resp.json())
-    //     .then(data => {
-    //         setUser({
-    //             user: data,
-    //             session: true
-    //         });
-    //         console.log(data);
-    //     })
+        fetch('http://iehouse-auth-laravel.test/api/' + action, {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/x-www-form-urlencoded',
+                'Authorization': token
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            
+            if (data.status === 'success') {
+                setUser(data.user);
+            } else {
+                console.log('hubo un error con el token');
+            }
 
-    // }
+        })
+
+    }
 
     return {
         respStatus: respStatus,
         handleCreate: handleCreate,
         handleLogin: handleLogin,
-        // handleGrantedAccess: handleGrantedAccess,
+        handleGrantedAccess: handleGrantedAccess,
         traerCsrfToken: traerCsrfToken
     };
 

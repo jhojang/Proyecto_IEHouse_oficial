@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 export const RemoveAuth = ({ Component }) => {
 
     if (localStorage.getItem('token') !== null) {
-        return <Redirect exact to='/home' />
+        return <Redirect exact to='/account' />
     }
     return <Component />;
 }
