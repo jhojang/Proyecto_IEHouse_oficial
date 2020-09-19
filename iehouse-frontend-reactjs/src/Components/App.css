@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -27,7 +31,7 @@
 .App-link {
   color: #61dafb;
 }
-
+ {}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -86,6 +90,12 @@ button:focus {
   width: 100%;
 }
 
+.h1-global {
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+}
+
 .logo {
   position: absolute;
   top: 10px;
@@ -99,15 +109,28 @@ button:focus {
   background-color: rgb(25, 140, 255)!important;
 }
 
+.bg-light-1 {
+  background-color: #f5f7fa!important
+}
+
 .auth-form {
   box-shadow: 0 .5rem 1rem rgba(0,0,0,0.30)!important;
+}
+
+.btn {
+  border-radius: 3px;
+}
+
+.btn-sm {
+  font-size: 13px;
 }
 
 .btn-primary {
   color: #fff;
   background-color: rgb(25, 140, 255)!important;
   border-color: rgb(25, 140, 255)!important;
-  box-shadow: 0 0rem 0.3rem 0.01rem rgb(25, 140, 255)!important;
+  font-size: 14px;
+  /* box-shadow: 0 0rem 0.3rem 0.01rem rgb(25, 140, 255)!important; */
 }
 
 .formdec {
@@ -221,7 +244,7 @@ margin-left: 0;
 .navbar {
   padding: 1rem 0rem;
   max-height: 73px;
-  box-shadow: 8px 0 16px 3px rgb(25 140 255 / 52%);
+  /* box-shadow: 8px 0 16px 3px rgb(25 140 255 / 52%); */
   border: none;
 }
 
@@ -360,4 +383,154 @@ margin-left: 0;
   background-color: rgb(255, 239, 219);
   color: rgb(255, 134, 76);
 }
+
+.home-container {
+  padding: 30px 40px;
+}
+
+.graphic {
+  height: 290px;
+}
+
+.principal-card {
+  box-sizing: border-box;
+}
+
+.text-size-1 {
+  font-size: 5px;
+}
+
+.text-size-2 {
+  font-size: 10px;
+}
+
+.text-size-3 {
+  font-size: 13px;
+}
+
+.text-size-4 {
+  font-size: 16px;
+}
+
+.text-size-4 {
+  font-size: 20px;
+}
+
+.text-size-6 {
+  font-size: 25px;
+}
+
+.text-size-7 {
+  font-size: 30px;
+}
+
+.text-size-8 {
+  font-size: 40px;
+}
+
+.text-size-50 {
+  font-size: 50px;
+}
+
+.text-size-100 {
+  font-size: 1000px;
+}
+
+.modal-bulb .modal-dialog {
+  max-width: 100%;
+}
+
+.modal-bulb .modal-content {
+  margin: 0 auto;
+  width: 70%;
+  border: none;
+}
+
+.modal-bulb .modal-content .modal-body {
+  padding: 20px 50px;
+}
+
+.modal-bulb .modal-content .modal-footer {
+  background-color:  rgb(25, 140, 255);
+  padding: 10px;
+}
+
+.user-checkbox-container {
+  max-height: 200px;
+}
+
+.user-checkbox {
+  display: none;
+}
+
+.label-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: white;
+  width: 90px;
+  padding: 10px 20px;
+  /* box-shadow: 0 3px 3px rgb(214, 214, 214); */
+  cursor: pointer;
+  border: 1px solid rgb(199, 199, 199);
+  border-bottom: 5px solid rgb(199, 199, 199);
+  border-radius: 3px;
+  transition: border 0.3s linear;
+}
+
+.label-user img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.label-user span {
+  border-top: 2px solid rgb(25, 140, 255);
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  margin-top: 5px;
+  line-height: 20px;
+  font-size: 13px;
+}
+
+/* .label-user:hover {
+  top: -2px;
+  box-shadow: 0 5px 3px rgb(214, 214, 214);
+} */
+
+.label-user:before {
+  /* content: '\2713\0020'; */
+  position: absolute;
+  background-color: white;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  right: 7px;
+  top: 75px;
+  transition: all 0.5s ease;
+  height: 20px;
+  width: 20px;
+  content: '';
+}
+
+.user-checkbox:checked + .label-user {
+  border: 1px solid rgb(25, 140, 255);
+  border-bottom: 5px solid rgb(25, 140, 255);
+  /* box-shadow: 0 3px 3px rgb(25, 140, 255); */
+}
+
+/* .user-checkbox:checked + .label-user:hover {
+  top: -2px;
+  box-shadow: 0 5px 3px rgb(25, 140, 255);
+} */
+
+.user-checkbox:checked + .label-user:before {
+  /* content: '\2713\0020'; */
+  top: -10px;
+  background-color: rgb(25, 140, 255);
+}
+
+
 

@@ -18,7 +18,7 @@ export const SideBar = ({user}) => {
                 <p class="role alert alert-warning">{(user.rol === 1) ? 'Administrador' : 'Usuario común'}</p>
             </div>
             <div class="list-group list-group-flush sticky-top-3 p-3" id="sidebar-list-group">
-                <Link to="/account/home" class="list-group-item list-group-item-active list-group-item-action mb-2 p-2 rounded-lg font-weight-bold"><span className="aside-icon text-success"><FontAwesomeIcon icon={faHome} /></span><span className="pl-2">Inicio</span></Link>
+                <Link to="/account/" class="list-group-item list-group-item-active list-group-item-action mb-2 p-2 rounded-lg font-weight-bold"><span className="aside-icon text-success"><FontAwesomeIcon icon={faHome} /></span><span className="pl-2">Inicio</span></Link>
                 <Link to="/account/bulbs" class="list-group-item list-group-item-action mb-2 p-2 rounded-lg  font-weight-bold"><span className="aside-icon text-warning"><FontAwesomeIcon icon={faSolidBulb} /></span><span className="pl-2">Bombillos</span></Link>
                 <Link to="/account/energia" class="list-group-item list-group-item-action mb-2 p-2 rounded-lg  font-weight-bold"><span className="aside-icon text-primary"><FontAwesomeIcon icon={faBolt} /></span><span className="pl-2">Informe energía</span></Link>
                 <a href="#" class="list-group-item list-group-item-action mb-2 p-2 rounded-lg  font-weight-bold"><span className="aside-icon text-secondary"><FontAwesomeIcon icon={faCog} /></span><span className="pl-2">Configuración</span></a>

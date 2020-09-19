@@ -6,6 +6,7 @@ import {
     // Redirect
 } from "react-router-dom";
 import BulbBody from '../Components/Organisms/BulbBody';
+import { HomeBody } from '../Components/Organisms/HomeBody';
 import { NavBar } from '../Components/Organisms/NavBar';
 import { SideBar } from '../Components/Organisms/SideBar';
 
@@ -14,15 +15,16 @@ export const AccountRoutes = ({user, handleLogOut}) => {
         <Router>
             <div>
                 <div class="d-flex bg-white global">
-                <SideBar user={user} />
+                    <SideBar user={user} />
 
-                <div className="w-100">
-                    <NavBar handleLogOut={handleLogOut} />
+                    <div className="w-100 bg-light-1">
+                        <NavBar handleLogOut={handleLogOut} />
 
-                    <Switch>
-                        <Route path='/account/bulbs' component={BulbBody} />
-                    </Switch>
-                </div>
+                        <Switch>
+                            <Route exact path='/account/bulbs' component={BulbBody} />
+                            <Route exact path='/account/' component={HomeBody} />
+                        </Switch>
+                    </div>
                 </div>
             </div>
         </Router>
