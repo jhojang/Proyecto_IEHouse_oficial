@@ -6,6 +6,7 @@ import com.springboot.api.bulbs.models.entity.Bulb;
 import com.springboot.api.bulbs.models.entity.Room;
 import com.springboot.api.bulbs.models.service.IBulbService;
 import com.springboot.api.bulbs.models.service.IRoomService;
+import com.springboot.api.bulbs.models.service.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-
 @RestController
 public class BulbController {
+
+    @Autowired
+    public IUserService userService;
     
     @Autowired
     public IRoomService roomService;
@@ -38,13 +41,7 @@ public class BulbController {
         return bulbService.findById(id);
     }
 
-    // @PostMapping("/bulbs")
-    // @ResponseStatus(HttpStatus.CREATED)
-    // public Bulb create(@RequestBody Bulb bulb) {
-    //     return bulbService.save(bulb);
-    // }
-
-    @PostMapping("/bulbs/{idRoom}")
+    @PostMapping(path="/bulbs/{idRoom}")
     @ResponseStatus(HttpStatus.CREATED)
     public Bulb create(@RequestBody Bulb bulb, @PathVariable Integer idRoom) {
         Room room = roomService.findById(idRoom);
@@ -52,14 +49,15 @@ public class BulbController {
         return bulbService.save(bulb);
     }
 
-
-    @PutMapping("/bulbs/{id}")
+    @PutMapping("/bulbs/idBulb/{idBulb}/idRoom/{idRoom}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Bulb update(@RequestBody Bulb bulb, @PathVariable Integer id) {
-        Bulb currentBulb = bulbService.findById(id);
+    public Bulb update(@RequestBody Bulb bulb, @PathVariable Integer idBulb, @PathVariable Integer idRoom) {
+        Room room = roomService.findById(idRoom);
+        Bulb currentBulb = bulbService.findById(idBulb);
         currentBulb.setName(bulb.getName());
         currentBulb.setState(bulb.getState());
-        currentBulb.setRoom(bulb.getRoom());
+        currentBulb.setUser(bulb.getUser());
+        currentBulb.setRoom(room);
         return bulbService.save(currentBulb);
     }
 
