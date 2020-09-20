@@ -2,6 +2,7 @@ package com.springboot.api.bulbs.models.controllers;
 
 import java.util.List;
 
+import com.springboot.api.bulbs.models.entity.Bulb;
 import com.springboot.api.bulbs.models.entity.User;
 import com.springboot.api.bulbs.models.service.IUserService;
 
@@ -24,7 +25,12 @@ public class UserController {
         List<User> userList = userService.findAll();
         for (int i = 0; i < userList.size(); i++) {
             currentUser = userList.get(i);
-            currentUser.setBulb(null);
+            List<Bulb> currentBulbList = currentUser.getBulb();
+            Bulb currentBulb = new Bulb();
+            for (int j = 0; j < currentBulbList.size(); j++) {
+                currentBulb = currentBulbList.get(j);
+                currentBulb.setUser(null);
+            }
         }
         return userList;
     }
