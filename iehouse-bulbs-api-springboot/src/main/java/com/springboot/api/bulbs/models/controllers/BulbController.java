@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.springboot.api.bulbs.models.entity.Bulb;
 import com.springboot.api.bulbs.models.entity.Room;
+import com.springboot.api.bulbs.models.entity.User;
 import com.springboot.api.bulbs.models.service.IBulbService;
 import com.springboot.api.bulbs.models.service.IRoomService;
 import com.springboot.api.bulbs.models.service.IUserService;
@@ -45,8 +46,15 @@ public class BulbController {
         List<Bulb> Bulblist = bulbService.findAll();
         for (int i = 0; i < Bulblist.size(); i++) {
             currentBulb = Bulblist.get(i);
-            currentBulb.setUser(null);
+            List<User> currentUserList = currentBulb.getUser();
+            User currentUser = new User();
+            for (int j = 0; j < currentUserList.size(); j++) {
+                currentUser = currentUserList.get(j);
+                currentUser.setBulb(null);
+            }
         }
+        
+        
         return Bulblist;
     }
 
