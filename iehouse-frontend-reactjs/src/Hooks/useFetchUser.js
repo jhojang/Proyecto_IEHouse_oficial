@@ -1,14 +1,6 @@
 import { useState, useEffect } from 'react';
 
 export const useFetchUser = (action) => {
-    // const [user, setUser] = useState({
-    //     username: '',
-    //     name: '',
-    //     last_name: '',
-    //     email: '',
-    //     password: '',
-    //     confirm_password: ''
-    // })
 
     const [csrfToken, setCsrfToken] = useState('');
     const [respStatus, setRespStatus] = useState({});

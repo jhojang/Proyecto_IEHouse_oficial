@@ -29,12 +29,12 @@ export const BulbTitle = () => {
                     <h1>Bombillos</h1>
                 </div>
                 <div className="col d-flex justify-content-end">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <button class="btn btn-primary ml-4" href="#">Agregar cuarto</button>
+                    <ul className="nav">
+                        <li className="nav-item">
+                            <button className="btn btn-primary ml-4" href="#">Agregar cuarto</button>
                         </li>
-                        <li class="nav-item">
-                            <button onClick={handleOpenModal} class="btn btn-primary ml-4" href="#">Agregar bombillo</button>
+                        <li className="nav-item">
+                            <button onClick={handleOpenModal} className="btn btn-primary ml-4" href="#">Agregar bombillo</button>
                         </li>
                     </ul>
                     <Modal className="modal modal-bulb" show={showModal} onHide={handleCloseModal}>
@@ -46,31 +46,31 @@ export const BulbTitle = () => {
                                 </div>
                                 <div className="col">
                                 <form>
-                                    <div class="form-group">
+                                    <div className="form-group">
                                         <label for="disabledTextInput">Ingresa el nombre del bombillo</label>
-                                        <input type="text" id="disabledTextInput" class="form-control" placeholder="Nombre" />
+                                        <input type="text" id="disabledTextInput" className="form-control" placeholder="Nombre" />
                                     </div>
-                                    <div class="form-group">
+                                    <div className="form-group">
                                         <label for="disabledSelect">Cuarto</label>
                                         <Select defaultValue={options[0]} options={options} />
                                     </div>
                                     <p className="mb-0">Permisos</p>
                                     <div className="user-checkbox-container pt-3 w-100 d-flex flex-wrap overflow-auto">
                                         <div class="mr-2">
-                                            <input type="checkbox" class="user-checkbox" id="customCheckDisabled1" />
-                                            <label class="label-user" for="customCheckDisabled1"><img src={avatar} /><span>Euler</span></label>
+                                            <input type="checkbox" className="user-checkbox" id="customCheckDisabled1" />
+                                            <label className="label-user" for="customCheckDisabled1"><img src={avatar} /><span>Euler</span></label>
                                         </div>
-                                        <div class="mr-2">
-                                            <input type="checkbox" class="user-checkbox" id="customCheckDisabled2" />
-                                            <label class="label-user" for="customCheckDisabled2"><img src={avatar} /><span>Euler</span></label>
+                                        <div className="mr-2">
+                                            <input type="checkbox" className="user-checkbox" id="customCheckDisabled2" />
+                                            <label className="label-user" for="customCheckDisabled2"><img src={avatar} /><span>Euler</span></label>
                                         </div>
-                                        <div class="mr-2">
-                                            <input type="checkbox" class="user-checkbox" id="customCheckDisabled3" />
-                                            <label class="label-user" for="customCheckDisabled3"><img src={avatar} /><span>Euler</span></label>
+                                        <div className="mr-2">
+                                            <input type="checkbox" className="user-checkbox" id="customCheckDisabled3" />
+                                            <label className="label-user" for="customCheckDisabled3"><img src={avatar} /><span>Euler</span></label>
                                         </div>
-                                        <div class="">
-                                            <input type="checkbox" class="user-checkbox" id="customCheckDisabled4" />
-                                            <label class="label-user" for="customCheckDisabled4"><img src={avatar} /><span>Euler</span></label>
+                                        <div className="">
+                                            <input type="checkbox" className="user-checkbox" id="customCheckDisabled4" />
+                                            <label className="label-user" for="customCheckDisabled4"><img src={avatar} /><span>Euler</span></label>
                                         </div>
                                     </div>
                                     <input type="submit" className="btn btn-primary" value="Enviar" />
@@ -79,7 +79,7 @@ export const BulbTitle = () => {
                             </div>
                         </Modal.Body>
                         <Modal.Footer>
-                            <button onClick={handleCloseModal} class="btn primary bg-white pl-4 pr-4" href="#">Cerrar</button>
+                            <button onClick={handleCloseModal} className="btn primary bg-white pl-4 pr-4" href="#">Cerrar</button>
                         </Modal.Footer>
                     </Modal>
                 </div>
@@ -102,7 +102,7 @@ export const BulbTitle = () => {
                     </ul>
                 </div>
                 <div className="col d-flex justify-content-end">
-                    <ul class="nav">
+                    <ul className="nav">
                         
                     </ul>
                 </div>

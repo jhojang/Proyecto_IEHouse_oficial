@@ -17,7 +17,7 @@ export const AccountScreen = () => {
 
     useEffect(() => {
         checkToken();
-    }, [user]);
+    }, []);
 
     const [loggedIn, setLoggedIn] = useState(true);
 
