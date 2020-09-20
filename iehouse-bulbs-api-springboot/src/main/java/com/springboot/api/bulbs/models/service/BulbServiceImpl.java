@@ -38,5 +38,10 @@ public class BulbServiceImpl implements IBulbService {
     public void Delete(Integer id) {
         bulbDao.deleteById(id);
     }
+
+    @Override
+    public List<Integer> findAllP() {
+        return (List<Integer>) bulbDao.findAllP();
+    }
     
 }

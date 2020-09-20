@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +33,7 @@ public class Bulb implements Serializable {
 	@JoinColumn(name = "id_room")
 	Room room;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name = "bombillo_user",
 				joinColumns = @JoinColumn(name = "id_bombillo"),
 				inverseJoinColumns = @JoinColumn(name = "id_user"))
@@ -41,31 +42,31 @@ public class Bulb implements Serializable {
 	public Integer getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 	public boolean getState() {
 		return state;
 	}
-	public void setState(boolean state) {
+	public void setState(final boolean state) {
 		this.state = state;
 	}
 	public Room getRoom() {
 		return room;
 	}
-	public void setRoom(Room room) {
+	public void setRoom(final Room room) {
 		this.room = room;
 	}
 	public List<User> getUser() {
 		return user;
 	}
-	public void setUser(List<User> user) {
+	public void setUser(final List<User> user) {
 		this.user = user;
 	}
 

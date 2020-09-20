@@ -5,6 +5,8 @@ import java.util.List;
 import com.springboot.api.bulbs.models.entity.Bulb;
 
 public interface IBulbService {
+
+    public List<Integer> findAllP();
     
     public List<Bulb> findAll();
 

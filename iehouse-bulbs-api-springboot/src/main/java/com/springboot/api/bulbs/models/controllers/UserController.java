@@ -17,14 +17,21 @@ public class UserController {
     @Autowired
     public IUserService userService;
 
+    @GetMapping("/users")
+    public List<User> findAll() {
+
+        User currentUser = new User();
+        List<User> userList = userService.findAll();
+        for (int i = 0; i < userList.size(); i++) {
+            currentUser = userList.get(i);
+            currentUser.setBulb(null);
+        }
+        return userList;
+    }
+
     @GetMapping("/users/{id}")
     public User findById(@PathVariable Integer id) {
         return userService.findById(id);
-    }
-
-    @GetMapping("/users")
-    public List<User> findAll() {
-        return userService.findAll();
     }
 
     @DeleteMapping("users/{id}")

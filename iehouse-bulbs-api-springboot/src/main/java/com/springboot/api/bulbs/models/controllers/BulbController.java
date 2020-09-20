@@ -10,6 +10,7 @@ import com.springboot.api.bulbs.models.service.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+@CrossOrigin(origins= {"http://localhost:3000"})
 @RestController
 public class BulbController {
 
@@ -31,9 +33,26 @@ public class BulbController {
     @Autowired
     public IBulbService bulbService;
 
+    // @GetMapping("/bulbs")
+    // public List<Bulb> list() {
+    //     List<Bulb> Bulblist = bulbService.findAll();
+    //     return Bulblist;
+    // }
+
     @GetMapping("/bulbs")
     public List<Bulb> list() {
-        return bulbService.findAll();
+        Bulb currentBulb = new Bulb();
+        List<Bulb> Bulblist = bulbService.findAll();
+        for (int i = 0; i < Bulblist.size(); i++) {
+            currentBulb = Bulblist.get(i);
+            currentBulb.setUser(null);
+        }
+        return Bulblist;
+    }
+
+    @GetMapping("/bulbsp")
+    public List<Integer> listP() {
+        return bulbService.findAllP();
     }
 
     @GetMapping("/bulbs/{id}")
@@ -41,12 +60,21 @@ public class BulbController {
         return bulbService.findById(id);
     }
 
+    // @PostMapping(path="/bulbs/{idRoom}")
+    // @ResponseStatus(HttpStatus.CREATED)
+    // public Bulb create(@RequestBody Bulb bulb, @PathVariable Integer idRoom) {
+    //     Room room = roomService.findById(idRoom);
+    //     bulb.setRoom(room);
+    //     return bulbService.save(bulb);
+    // }
+
     @PostMapping(path="/bulbs/{idRoom}")
     @ResponseStatus(HttpStatus.CREATED)
     public Bulb create(@RequestBody Bulb bulb, @PathVariable Integer idRoom) {
         Room room = roomService.findById(idRoom);
         bulb.setRoom(room);
         return bulbService.save(bulb);
+        // return bulb.getUser();
     }
 
     @PutMapping("/bulbs/idBulb/{idBulb}/idRoom/{idRoom}")
