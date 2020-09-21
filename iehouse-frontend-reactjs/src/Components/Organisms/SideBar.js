@@ -5,7 +5,13 @@ import avatar from '../../img/avatar.jpg';
 import logoPrueba from '../../img/logoPrueba.jpg';
 import { Link, NavLink } from 'react-router-dom';
 
-export const SideBar = ({user}) => {
+export const SideBar = ({user, actualPageBody, setActualPageBody}) => {
+
+    const handleActiveNavLink = (pageBody) => {
+        setActualPageBody(pageBody);
+        localStorage.setItem('PageBody', pageBody);
+    }
+
     return (
         <div className="bg-white border-right" id="sidebar-wrapper">
             <div className="sidebar-heading border-bottom sticky-top bg-white">
@@ -18,9 +24,9 @@ export const SideBar = ({user}) => {
                 <p className="role alert alert-warning">{(user.rol === 1) ? 'Administrador' : 'Usuario común'}</p>
             </div>
             <div className="list-group list-group-flush sticky-top-3 p-3" id="sidebar-list-group">
-                <Link to="/account/" className="list-group-item list-group-item-active list-group-item-action mb-2 p-2 rounded-lg font-weight-bold"><span className="aside-icon text-success"><FontAwesomeIcon icon={faHome} /></span><span className="pl-2">Inicio</span></Link>
-                <Link to="/account/bulbs" className="list-group-item list-group-item-action mb-2 p-2 rounded-lg  font-weight-bold"><span className="aside-icon text-warning"><FontAwesomeIcon icon={faSolidBulb} /></span><span className="pl-2">Bombillos</span></Link>
-                <Link to="/account/energia" className="list-group-item list-group-item-action mb-2 p-2 rounded-lg  font-weight-bold"><span className="aside-icon text-primary"><FontAwesomeIcon icon={faBolt} /></span><span className="pl-2">Informe energía</span></Link>
+                <Link to="/account/" onClick={() => handleActiveNavLink('')} className={`list-group-item ${actualPageBody === '' && "list-group-item-active"} mb-2 p-2 rounded-lg font-weight-bold`}><span className="aside-icon text-success"><FontAwesomeIcon icon={faHome} /></span><span className="pl-2">Inicio</span></Link>
+                <Link to="/account/bulbs" onClick={() => handleActiveNavLink('bulbs')} className={`list-group-item ${actualPageBody === 'bulbs' && "list-group-item-active"} mb-2 p-2 rounded-lg  font-weight-bold`}><span className="aside-icon text-warning"><FontAwesomeIcon icon={faSolidBulb} /></span><span className="pl-2">Bombillos</span></Link>
+                <Link to="/account/energy" onClick={() => handleActiveNavLink('energy')} className={`list-group-item ${actualPageBody === 'energy' && "list-group-item-active"} mb-2 p-2 rounded-lg  font-weight-bold`}><span className="aside-icon text-primary"><FontAwesomeIcon icon={faBolt} /></span><span className="pl-2">Informe energía</span></Link>
                 <a href="#" className="list-group-item list-group-item-action mb-2 p-2 rounded-lg  font-weight-bold"><span className="aside-icon text-secondary"><FontAwesomeIcon icon={faCog} /></span><span className="pl-2">Configuración</span></a>
                 <a href="#" className="list-group-item list-group-item-action mb-2 p-2 rounded-lg  font-weight-bold"><span className="aside-icon text-danger"><FontAwesomeIcon icon={faEnvelope} /></span><span className="pl-2">Contacto</span></a>
             </div>

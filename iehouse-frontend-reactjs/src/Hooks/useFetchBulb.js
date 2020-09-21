@@ -2,19 +2,20 @@ import {useState} from 'react'
 
 export const useFetchBulb = () => {
     
-    const [bulb, setBulb] = useState([])
+    const [bulbs, setBulb] = useState([])
 
-    const handleList = () => {
+    const handleListBulb = () => {
         fetch("http://localhost:8080/bulbs")
         .then(resp => resp.json())
         .then(data => {
+            console.log(data);
             setBulb(data);
         })
     }
 
     return {
-        bulb: bulb,
-        handleList: handleList
+        bulbs,
+        handleListBulb
     }
 
 

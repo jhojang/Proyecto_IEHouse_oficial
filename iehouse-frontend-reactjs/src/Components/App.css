@@ -31,7 +31,7 @@
 .App-link {
   color: #61dafb;
 }
- {}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -236,7 +236,7 @@ margin-left: 0;
   .sticky-top-3 {
     position: -webkit-sticky;
     position: sticky;
-    top: 271px;
+    top: 287px;
     z-index: 1020;
   }
 }
@@ -285,6 +285,16 @@ margin-left: 0;
 .list-group-item-active:hover {
   background-color: rgba(64, 160, 255, 0.342);
   color: rgb(25, 140, 255);
+}
+
+.room-item span {
+  /* background-color: rgb(142, 194, 255); */
+  padding: 1px 5.5px;
+  font-weight: normal;
+  border-radius: 3px;
+  line-height: 0;
+  font-size: 13px;
+  margin-right: 5px;
 }
 
 .room-item-active {
@@ -354,11 +364,12 @@ margin-left: 0;
 
 .main-container {
   background-color: #f5f7fa;
+  min-height: 67vh;
 }
 
-.alert-green {
-  background-color: rgb(228, 249, 209);
-  color: rgb(124, 179, 15);
+.alert-brown {
+  color: #856404;
+  background-color: #fff3cd;
 }
 
 .alert-green {

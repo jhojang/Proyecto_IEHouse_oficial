@@ -6,6 +6,8 @@ import { AccountRoutes } from '../../Routes/AccountRoutes';
 
 export const AccountScreen = () => {
 
+    const [actualPageBody, setActualPageBody] = useState(localStorage.getItem('PageBody'));
+
     const {handleGrantedAccess} = useFetchUser('granted-access');
 
     const checkToken = () => {
@@ -29,11 +31,15 @@ export const AccountScreen = () => {
     if (loggedIn === false) {
         return <Redirect exact to='/login' />
     }
-
     
     return (
         <>
-            <AccountRoutes user={user} handleLogOut={handleLogOut} />
+            <AccountRoutes 
+                user={user} 
+                handleLogOut={handleLogOut} 
+                actualPageBody={actualPageBody}
+                setActualPageBody={setActualPageBody}
+            />
         </>
     )
 }

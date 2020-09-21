@@ -1,10 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Modal } from 'react-bootstrap';
 import Select from 'react-select';
 import bulbVector from '../../svg/bulbVector.svg';
 import avatar from '../../img/avatar.jpg';
+import { BulbBodyContext } from '../../Context/BulbBodyContext';
 
 export const BulbTitle = () => {
+
+    const {bulbs, rooms, bulbMenu, handleListRoom, setBulbMenu} = useContext(BulbBodyContext);
+
+    useEffect(() => {
+        handleListRoom();
+    }, [])
 
     const [showModal, setShowModal] = useState(false)
 
@@ -16,6 +23,17 @@ export const BulbTitle = () => {
         setShowModal(false);
     }
 
+    
+    rooms.forEach((room) => {
+        let cont = 0;
+        bulbs.forEach((bulb) => {
+            if (room.id === bulb.room.id) {
+                cont++;
+            }
+        });
+        room.numBulbs = cont;
+    });
+ 
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
         { value: 'strawberry', label: 'Strawberry' },
@@ -87,18 +105,24 @@ export const BulbTitle = () => {
             <div className="row">
                 <div className="col">
                     <ul className="nav font-weight-bold">
-                        <li className="room-item nav-item ">
-                            <a className="nav-link room-item-active mr-5 pb-3 pl-1 pr-1 mr-3" href="#">Todos</a>
-                        </li>
                         <li className="room-item nav-item">
-                            <a className="nav-link mr-5 pb-3 pl-1 pr-1 mr-3" href="#">Agregar</a>
+                            <a
+                                onClick={() => {setBulbMenu(0)}}
+                                className={`nav-link ${(bulbMenu === 0) && "room-item-active"} mr-5 pb-3 pl-1 pr-1 mr-3`}
+                                href="#"
+                            >
+                                <span className="alert-blue">
+                                    {bulbs.length}
+                                </span>Todos
+                            </a>
                         </li>
-                        <li className="room-item nav-item">
-                            <a className="nav-link mr-5 pb-3 pl-1 pr-1 mr-3" href="#">Link</a>
-                        </li>
-                        <li className="room-item nav-item">
-                            <a className="nav-link mr-5 pb-3 pl-1 pr-1 mr-3 disabled" href="#">Disabled</a>
-                        </li>
+                    {
+                        rooms.map(room => (
+                            <li key={room.id} className="room-item nav-item ">
+                                <a onClick={() => {setBulbMenu(room.id)}} className={`nav-link ${bulbMenu === room.id && "room-item-active"} mr-5 pb-3 pl-1 pr-1 mr-3`} href="#"><span className="alert-blue">{room.numBulbs}</span>{room.name}</a>
+                            </li>
+                        ))
+                    }
                     </ul>
                 </div>
                 <div className="col d-flex justify-content-end">

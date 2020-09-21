@@ -30,6 +30,7 @@ export const LoginScreen = () => {
         });
         
         handleLogin(formDataJson, setValidator, login_form, setLoggedIn);
+        localStorage.setItem('PageBody', '');
     }
 
     if (loggedIn === true) {
