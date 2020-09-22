@@ -15,9 +15,26 @@ export const useFetchRoom = () => {
 
     }
 
+    const handleAddRoom = (room) => {
+
+        fetch("http://localhost:8080/rooms", {
+            method: 'POST',
+            body: JSON.stringify(room),
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            handleListRoom();
+        })
+
+    }
+
     return {
         rooms,
-        handleListRoom
+        handleListRoom,
+        handleAddRoom
     }
 
 }

@@ -3,7 +3,6 @@ import loginVector from '../../svg/loginVector.svg';
 import { useFetchUser } from '../../Hooks/useFetchUser';
 import { LoginForm } from '../Molecules/LoginForm';
 import { Redirect } from 'react-router-dom';
-import { useUser } from '../../Hooks/useUser';
 
 export const LoginScreen = () => {
 

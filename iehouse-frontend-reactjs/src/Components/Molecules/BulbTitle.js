@@ -1,24 +1,41 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Modal } from 'react-bootstrap';
-import Select from 'react-select';
-import bulbVector from '../../svg/bulbVector.svg';
-import avatar from '../../img/avatar.jpg';
+// import { Modal } from 'react-bootstrap';
+// import Select from 'react-select';
+// import bulbVector from '../../svg/bulbVector.svg';
+// import avatar from '../../img/avatar.jpg';
 import { UseContext } from '../../Context/UseContext';
+import { ModalWindow } from './ModalWindow';
+import { ModalAddRoom } from './ModalAddRoom';
+import { useFetchRoom } from '../../Hooks/useFetchRoom';
 
 export const BulbTitle = ({roomMenu, setRoomMenu}) => {
 
-    const {bulbs, rooms, handleListRoom} = useContext(UseContext);
+    const {bulbs} = useContext(UseContext);
 
-    const [showModal, setShowModal] = useState(false)
+    const {rooms, handleListRoom, handleAddRoom} = useFetchRoom();
 
-    const handleOpenModal = () => {
-        setShowModal(true);
+    useEffect(() => {
+        handleListRoom();
+    }, [])
+
+    const [showModal, setShowModal] = useState({
+        type: 'none',
+        show: false
+    });
+
+    const handleOpenModal = (type) => {
+        setShowModal({
+            type: type,
+            show: true
+        });
     }
 
     const handleCloseModal = () => {
-        setShowModal(false);
+        setShowModal({
+            type: 'none',
+            show: false
+        });
     }
-
     
     rooms.forEach((room) => {
         let cont = 0;
@@ -45,13 +62,22 @@ export const BulbTitle = ({roomMenu, setRoomMenu}) => {
                 <div className="col d-flex justify-content-end">
                     <ul className="nav">
                         <li className="nav-item">
-                            <button className="btn btn-primary ml-4" href="#">Agregar cuarto</button>
+                            <button className="btn btn-primary ml-4" onClick={() => handleOpenModal('addRoom')} href="#">Agregar cuarto</button>
                         </li>
                         <li className="nav-item">
                             <button onClick={handleOpenModal} className="btn btn-primary ml-4" href="#">Agregar bombillo</button>
                         </li>
                     </ul>
-                    <Modal className="modal modal-bulb" show={showModal} onHide={handleCloseModal}>
+                    {
+                        (showModal.show === true) && (
+                            (showModal.type === 'addRoom' && (
+                                <ModalAddRoom showM={showModal.show} handleCloseModal={handleCloseModal} handleAddRoom={handleAddRoom} />
+                            ))
+                        )
+                    }
+                    
+                    {/* <ModalWindow showModal={showModal} handleCloseModal={handleCloseModal} /> */}
+                    {/* <Modal className="modal modal-bulb" show={showModal} onHide={handleCloseModal}>
                         <Modal.Header className="text-size-8 border-0 pl-5 border-bottom" closeButton>Agregar bombillo</Modal.Header>
                         <Modal.Body>
                             <div className="row">
@@ -95,7 +121,7 @@ export const BulbTitle = ({roomMenu, setRoomMenu}) => {
                         <Modal.Footer>
                             <button onClick={handleCloseModal} className="btn primary bg-white pl-4 pr-4" href="#">Cerrar</button>
                         </Modal.Footer>
-                    </Modal>
+                    </Modal> */}
                 </div>
             </div>
             <div className="row">
