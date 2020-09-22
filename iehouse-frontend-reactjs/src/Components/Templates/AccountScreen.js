@@ -3,8 +3,19 @@ import { Redirect } from 'react-router-dom';
 import { useUser } from '../../Hooks/useUser';
 import { useFetchUser } from '../../Hooks/useFetchUser';
 import { AccountRoutes } from '../../Routes/AccountRoutes';
+import { UseContext } from '../../Context/UseContext';
+import { useFetchRoom } from '../../Hooks/useFetchRoom';
+import { useFetchBulb } from '../../Hooks/useFetchBulb';
 
 export const AccountScreen = () => {
+
+    const { rooms, handleListRoom } = useFetchRoom();
+    const { bulbs, handleListBulb } = useFetchBulb();
+
+    useEffect(() => {
+        handleListBulb();
+        handleListRoom();
+    }, [])
 
     const [actualPageBody, setActualPageBody] = useState(localStorage.getItem('PageBody'));
 
@@ -25,6 +36,7 @@ export const AccountScreen = () => {
 
     const handleLogOut = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('PageBody');
         setLoggedIn(false);
     }
 
@@ -34,12 +46,14 @@ export const AccountScreen = () => {
     
     return (
         <>
+        <UseContext.Provider value={{user, bulbs, rooms, handleListBulb, handleListRoom}}>
             <AccountRoutes 
                 user={user} 
                 handleLogOut={handleLogOut} 
                 actualPageBody={actualPageBody}
                 setActualPageBody={setActualPageBody}
             />
+        </UseContext.Provider>
         </>
     )
 }

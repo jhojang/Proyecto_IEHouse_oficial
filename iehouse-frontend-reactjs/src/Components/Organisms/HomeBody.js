@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Line } from 'react-chartjs-2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 import { faCube } from '@fortawesome/free-solid-svg-icons';
 import { TitleCard } from '../Atoms/TitleCard';
-
+import { useFetchRoom } from '../../Hooks/useFetchRoom';
+import { useFetchBulb } from '../../Hooks/useFetchBulb';
+import { UseContext } from '../../Context/UseContext';
 
 export const HomeBody = () => {
+
+    const { user, bulbs, rooms } = useContext(UseContext);
 
     const getChartData = (e) => {
         const ctx = e.getContext("2d");
@@ -42,7 +46,7 @@ export const HomeBody = () => {
                 <div className="row">
                     <div className="w-50 p-0 col mr-1 d-flex flex-column">
                         <div className="bg-white mb-2 p-3 h-50 d-flex flex-column justify-content-center align-items-center">
-                            <h2 className="text-size-8 text-primary">Bienvenido, Euler</h2>
+                            <h2 className="text-size-8 text-primary">Bienvenido, {user.username}</h2>
                             dfhgd
                         </div>
                         <div className="row m-0 p-0 h-50">
@@ -50,7 +54,7 @@ export const HomeBody = () => {
                             <div class="col principal-card card bg-white border-0 p-0 mr-1 rounded-0">
                                 <TitleCard title={'Bombillos'} icon={<FontAwesomeIcon icon={faLightbulb} />} />
                                 <div class="p-3 h-100 d-flex flex-column justify-content-center align-items-center">
-                                    <h2 className="text-size-7 text-primary">10</h2>
+                                    <h2 className="text-size-7 text-primary">{bulbs.length}</h2>
                                     <p className="p-0">bombillos <span className="alert-green p-1 rounded pt-0">permitidos</span></p>
                                     <button className="btn btn-sm btn-primary">Administrar</button>
                                 </div>
@@ -59,7 +63,7 @@ export const HomeBody = () => {
                             <div class="col principal-card card bg-white border-0 p-0 ml-1 rounded-0">
                                 <TitleCard title={'Cuartos'} icon={<FontAwesomeIcon icon={faCube} />} />
                                 <div class="p-3 h-100 d-flex flex-column justify-content-center align-items-center">
-                                    <h2 className="text-size-7 text-primary">3</h2>
+                                    <h2 className="text-size-7 text-primary">{rooms.length}</h2>
                                     <p className="p-0">cuartos <span className="alert-green p-1 rounded pt-0">permitidos</span></p>
                                 </div>
                             </div>

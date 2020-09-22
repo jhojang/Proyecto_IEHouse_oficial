@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Bulb } from '../Atoms/Bulb'
 import { BulbTitle } from '../Molecules/BulbTitle'
 import { Horary } from '../Molecules/Horary'
-import { useFetchBulb } from '../../Hooks/useFetchBulb';
-import { useFetchRoom } from '../../Hooks/useFetchRoom';
+// import { useFetchBulb } from '../../Hooks/useFetchBulb';
+// import { useFetchRoom } from '../../Hooks/useFetchRoom';
 import { BulbBodyContext } from '../../Context/BulbBodyContext';
+import { UseContext } from '../../Context/UseContext';
 
 export default function BulbBody() {
 
-    const { rooms, handleListRoom } = useFetchRoom();
-    const { bulbs, handleListBulb } = useFetchBulb();
-    const [bulbMenu, setBulbMenu] = useState(0);
+    const { bulbs, rooms, handleListBulb, handleListRoom } = useContext(UseContext);
+    const [roomMenu, setRoomMenu] = useState(0);
 
     let iterBulbs = [];
 
-    useEffect(() => {
-        handleListBulb();
-    }, [])
-
     iterBulbs = bulbs.filter(bulb => {
-        if (bulbMenu === 0) {
+        if (roomMenu === 0) {
             return bulb;
         } else {
-            return bulb.room.id === bulbMenu;
+            return bulb.room.id === roomMenu;
         }
     });
 
@@ -30,8 +26,8 @@ export default function BulbBody() {
 
     return (
         <>
-        <BulbBodyContext.Provider value={{bulbs, rooms, bulbMenu, handleListBulb, handleListRoom, setBulbMenu}}>
-            <BulbTitle />
+        <BulbBodyContext.Provider value={{bulbs, rooms, handleListBulb, handleListRoom}}>
+            <BulbTitle roomMenu={roomMenu} setRoomMenu={setRoomMenu} />
             <div className="main-container bg-white container-fluid">
                 <div className="row p-2 pt-3">
                     <div className="col-9 d-flex flex-wrap">

@@ -3,15 +3,11 @@ import { Modal } from 'react-bootstrap';
 import Select from 'react-select';
 import bulbVector from '../../svg/bulbVector.svg';
 import avatar from '../../img/avatar.jpg';
-import { BulbBodyContext } from '../../Context/BulbBodyContext';
+import { UseContext } from '../../Context/UseContext';
 
-export const BulbTitle = () => {
+export const BulbTitle = ({roomMenu, setRoomMenu}) => {
 
-    const {bulbs, rooms, bulbMenu, handleListRoom, setBulbMenu} = useContext(BulbBodyContext);
-
-    useEffect(() => {
-        handleListRoom();
-    }, [])
+    const {bulbs, rooms, handleListRoom} = useContext(UseContext);
 
     const [showModal, setShowModal] = useState(false)
 
@@ -107,8 +103,8 @@ export const BulbTitle = () => {
                     <ul className="nav font-weight-bold">
                         <li className="room-item nav-item">
                             <a
-                                onClick={() => {setBulbMenu(0)}}
-                                className={`nav-link ${(bulbMenu === 0) && "room-item-active"} mr-5 pb-3 pl-1 pr-1 mr-3`}
+                                onClick={() => {setRoomMenu(0)}}
+                                className={`nav-link ${(roomMenu === 0) && "room-item-active"} mr-5 pb-3 pl-1 pr-1 mr-3`}
                                 href="#"
                             >
                                 <span className="alert-blue">
@@ -119,7 +115,7 @@ export const BulbTitle = () => {
                     {
                         rooms.map(room => (
                             <li key={room.id} className="room-item nav-item ">
-                                <a onClick={() => {setBulbMenu(room.id)}} className={`nav-link ${bulbMenu === room.id && "room-item-active"} mr-5 pb-3 pl-1 pr-1 mr-3`} href="#"><span className="alert-blue">{room.numBulbs}</span>{room.name}</a>
+                                <a onClick={() => {setRoomMenu(room.id)}} className={`nav-link ${roomMenu === room.id && "room-item-active"} mr-5 pb-3 pl-1 pr-1 mr-3`} href="#"><span className="alert-blue">{room.numBulbs}</span>{room.name}</a>
                             </li>
                         ))
                     }
