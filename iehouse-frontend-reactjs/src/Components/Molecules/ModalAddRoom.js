@@ -7,11 +7,16 @@ export const ModalAddRoom = ({showM, handleCloseModal, handleAddRoom}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const roomName = document.querySelector('#roomName').value;
-        const json = {
-            name: roomName
+        if ((roomName.trim()).length == 0) {
+            alert('El campo de nombre está vacío');
+        } else {
+            const json = {
+                name: roomName
+            }
+            handleAddRoom(json);
+            handleCloseModal();
         }
-        handleAddRoom(json);
-        handleCloseModal();
+        
     }
 
     return (
