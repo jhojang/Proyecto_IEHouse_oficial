@@ -6,21 +6,24 @@ import React, { useState, useEffect, useContext } from 'react'
 import { UseContext } from '../../Context/UseContext';
 import { ModalWindow } from './ModalWindow';
 import { ModalAddRoom } from './ModalAddRoom';
+import { ModalEditRoom } from './ModalEditRoom';
 import { useFetchRoom } from '../../Hooks/useFetchRoom';
 
 export const BulbTitle = ({roomMenu, setRoomMenu}) => {
 
     const {bulbs} = useContext(UseContext);
 
-    const {rooms, handleListRoom, handleAddRoom} = useFetchRoom();
+    const {rooms, handleListRoom, handleAddRoom, handleDeleteRoom} = useFetchRoom();
 
     useEffect(() => {
         handleListRoom();
     }, [])
 
     const [showModal, setShowModal] = useState({
-        type: 'none',
-        show: false
+        // type: 'none',
+        // show: false
+        type: 'editRooms',
+        show: true
     });
 
     const handleOpenModal = (type) => {
@@ -75,6 +78,14 @@ export const BulbTitle = ({roomMenu, setRoomMenu}) => {
                             ))
                         )
                     }
+                    {
+                        (showModal.show === true) && (
+                            (showModal.type === 'editRooms' && (
+                                <ModalEditRoom showM={showModal.show} handleCloseModal={handleCloseModal} handleAddRoom={handleAddRoom} handleDeleteRoom={handleDeleteRoom} rooms={rooms} />
+                            ))
+                        )
+                    }
+                    
                     
                     {/* <ModalWindow showModal={showModal} handleCloseModal={handleCloseModal} /> */}
                     {/* <Modal className="modal modal-bulb" show={showModal} onHide={handleCloseModal}>
@@ -125,7 +136,6 @@ export const BulbTitle = ({roomMenu, setRoomMenu}) => {
                 </div>
             </div>
             <div className="row">
-                <div className="col">
                     <ul className="nav font-weight-bold">
                         <li className="room-item nav-item">
                             <a
@@ -146,12 +156,10 @@ export const BulbTitle = ({roomMenu, setRoomMenu}) => {
                         ))
                     }
                     </ul>
-                </div>
-                <div className="col d-flex justify-content-end">
-                    <ul className="nav">
-                        
-                    </ul>
-                </div>
+                    <div className="p-2">
+                        <button className="btn btn-primary" onClick={() => (handleOpenModal('editRooms'))} >Editar</button>
+                    </div>
+                    
             </div>
         </div>
     )

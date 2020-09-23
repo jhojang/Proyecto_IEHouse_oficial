@@ -24,7 +24,7 @@ export const ModalAddRoom = ({showM, handleCloseModal, handleAddRoom}) => {
                     </div>
                     <div className="col d-flex align-items-center p-0 pt-4">
                         <form className="m-0 w-100" onSubmit={handleSubmit} >
-                            <input id="roomName" name="name" type="text" className="form-control border-none mb-2" placeholder="Ingrese el nombre" />
+                            <input id="roomName" autoFocus={true} name="name" type="text" className="form-control border-none mb-2" placeholder="Ingrese el nombre" />
                             <input type="submit" className="btn bg-white btn-block" />
                         </form>
                     </div>

@@ -4,9 +4,11 @@ export const useFetchRoom = () => {
     
     const [rooms, setRooms] = useState([]);
 
+    const url = "http://localhost:8080/rooms/";
+
     const handleListRoom = () => {
 
-        fetch("http://localhost:8080/rooms/")
+        fetch(url)
         .then(resp => resp.json())
         .then(data => {
             console.log(data);
@@ -17,7 +19,7 @@ export const useFetchRoom = () => {
 
     const handleAddRoom = (room) => {
 
-        fetch("http://localhost:8080/rooms", {
+        fetch(url, {
             method: 'POST',
             body: JSON.stringify(room),
             headers: {
@@ -31,10 +33,20 @@ export const useFetchRoom = () => {
 
     }
 
+    const handleDeleteRoom = (idRoom) => {
+        fetch(url + idRoom, {
+            method: "DELETE"
+        })
+        .then(data => {
+            handleListRoom();
+        })
+    }
+
     return {
         rooms,
         handleListRoom,
-        handleAddRoom
+        handleAddRoom,
+        handleDeleteRoom
     }
 
 }

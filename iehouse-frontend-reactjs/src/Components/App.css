@@ -425,7 +425,7 @@ margin-left: 0;
   font-size: 16px;
 }
 
-.text-size-4 {
+.text-size-5 {
   font-size: 20px;
 }
 
@@ -563,5 +563,26 @@ margin-left: 0;
   background-color: rgb(121, 121, 243);
 }
 
+.card-room {
+  width: 100%;
+  /* box-shadow: 0 0 3px gray; */
+  border-radius: 3px;
+  padding: 0;
+}
+
+.icon-room {
+  padding: .5rem .7rem!important;
+  font-size: 20px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.input-edit-name {
+  outline: none!important;
+}
+
+.input-edit-name:focus {
+  outline: none!important;
+}
 
 
