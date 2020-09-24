@@ -1,16 +1,29 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Bulb } from '../Atoms/Bulb'
 import { BulbTitle } from '../Molecules/BulbTitle'
 import { Horary } from '../Molecules/Horary'
-// import { useFetchBulb } from '../../Hooks/useFetchBulb';
-// import { useFetchRoom } from '../../Hooks/useFetchRoom';
-import { BulbBodyContext } from '../../Context/BulbBodyContext';
+import { useFetchRoom } from '../../Hooks/useFetchRoom';
 import { UseContext } from '../../Context/UseContext';
+import { useFetchBulb } from '../../Hooks/useFetchBulb';
 
 export default function BulbBody() {
 
-    const { bulbs, rooms, handleListBulb, handleListRoom } = useContext(UseContext);
+    const { setActualPageBody } = useContext(UseContext);
+
+    useEffect(() => {
+        localStorage.setItem('PageBody', 'bulbs');
+        setActualPageBody(localStorage.getItem('PageBody'));
+    }, [])
+    
     const [roomMenu, setRoomMenu] = useState(0);
+
+    const { bulbs, handleListBulb } = useFetchBulb();
+    const { rooms, handleListRoom } = useFetchRoom();
+
+    useEffect(() => {
+        handleListBulb();
+        handleListRoom();
+    },[])
 
     let iterBulbs = [];
 
@@ -22,12 +35,15 @@ export default function BulbBody() {
         }
     });
 
-    console.log(iterBulbs);
-
     return (
         <>
-        <BulbBodyContext.Provider value={{bulbs, rooms, handleListBulb, handleListRoom}}>
-            <BulbTitle roomMenu={roomMenu} setRoomMenu={setRoomMenu} />
+            <BulbTitle 
+                roomMenu={roomMenu}
+                setRoomMenu={setRoomMenu} 
+                bulbs={bulbs} 
+                handleListBulb={handleListBulb} 
+                rooms={rooms}
+            />
             <div className="main-container bg-white container-fluid">
                 <div className="row p-2 pt-3">
                     <div className="col-9 d-flex flex-wrap">
@@ -42,7 +58,6 @@ export default function BulbBody() {
                     </div>
                 </div>
             </div>
-        </BulbBodyContext.Provider>
         </>
     )
 }

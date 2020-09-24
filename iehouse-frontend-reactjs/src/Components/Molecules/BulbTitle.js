@@ -1,17 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react'
-// import { Modal } from 'react-bootstrap';
-// import Select from 'react-select';
-// import bulbVector from '../../svg/bulbVector.svg';
-// import avatar from '../../img/avatar.jpg';
-import { UseContext } from '../../Context/UseContext';
-import { ModalWindow } from './ModalWindow';
+import React, { useState, useEffect } from 'react'
 import { ModalAddRoom } from './ModalAddRoom';
 import { ModalEditRoom } from './ModalEditRoom';
 import { useFetchRoom } from '../../Hooks/useFetchRoom';
 
-export const BulbTitle = ({roomMenu, setRoomMenu}) => {
-
-    const {bulbs} = useContext(UseContext);
+export const BulbTitle = ({roomMenu, setRoomMenu, bulbs, handleListBulb}) => {
 
     const {rooms, handleListRoom, handleAddRoom, handleDeleteRoom} = useFetchRoom();
 
@@ -20,10 +12,8 @@ export const BulbTitle = ({roomMenu, setRoomMenu}) => {
     }, [])
 
     const [showModal, setShowModal] = useState({
-        // type: 'none',
-        // show: false
-        type: 'editRooms',
-        show: true
+        type: 'none',
+        show: false
     });
 
     const handleOpenModal = (type) => {
@@ -38,6 +28,7 @@ export const BulbTitle = ({roomMenu, setRoomMenu}) => {
             type: 'none',
             show: false
         });
+        handleListBulb();
     }
     
     rooms.forEach((room) => {
@@ -54,7 +45,7 @@ export const BulbTitle = ({roomMenu, setRoomMenu}) => {
         { value: 'chocolate', label: 'Chocolate' },
         { value: 'strawberry', label: 'Strawberry' },
         { value: 'vanilla', label: 'Vanilla' }
-      ]
+    ]
 
     return (
         <div className="bg-white border-bottom pl-4 pr-4 pt-4 pb-0 m-0">
@@ -85,54 +76,6 @@ export const BulbTitle = ({roomMenu, setRoomMenu}) => {
                             ))
                         )
                     }
-                    
-                    
-                    {/* <ModalWindow showModal={showModal} handleCloseModal={handleCloseModal} /> */}
-                    {/* <Modal className="modal modal-bulb" show={showModal} onHide={handleCloseModal}>
-                        <Modal.Header className="text-size-8 border-0 pl-5 border-bottom" closeButton>Agregar bombillo</Modal.Header>
-                        <Modal.Body>
-                            <div className="row">
-                                <div className="col">
-                                    <img src={bulbVector} />
-                                </div>
-                                <div className="col">
-                                <form>
-                                    <div className="form-group">
-                                        <label for="disabledTextInput">Ingresa el nombre del bombillo</label>
-                                        <input type="text" id="disabledTextInput" className="form-control" placeholder="Nombre" />
-                                    </div>
-                                    <div className="form-group">
-                                        <label for="disabledSelect">Cuarto</label>
-                                        <Select defaultValue={options[0]} options={options} />
-                                    </div>
-                                    <p className="mb-0">Permisos</p>
-                                    <div className="user-checkbox-container pt-3 w-100 d-flex flex-wrap overflow-auto">
-                                        <div class="mr-2">
-                                            <input type="checkbox" className="user-checkbox" id="customCheckDisabled1" />
-                                            <label className="label-user" for="customCheckDisabled1"><img src={avatar} /><span>Euler</span></label>
-                                        </div>
-                                        <div className="mr-2">
-                                            <input type="checkbox" className="user-checkbox" id="customCheckDisabled2" />
-                                            <label className="label-user" for="customCheckDisabled2"><img src={avatar} /><span>Euler</span></label>
-                                        </div>
-                                        <div className="mr-2">
-                                            <input type="checkbox" className="user-checkbox" id="customCheckDisabled3" />
-                                            <label className="label-user" for="customCheckDisabled3"><img src={avatar} /><span>Euler</span></label>
-                                        </div>
-                                        <div className="">
-                                            <input type="checkbox" className="user-checkbox" id="customCheckDisabled4" />
-                                            <label className="label-user" for="customCheckDisabled4"><img src={avatar} /><span>Euler</span></label>
-                                        </div>
-                                    </div>
-                                    <input type="submit" className="btn btn-primary" value="Enviar" />
-                                </form>
-                                </div>
-                            </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <button onClick={handleCloseModal} className="btn primary bg-white pl-4 pr-4" href="#">Cerrar</button>
-                        </Modal.Footer>
-                    </Modal> */}
                 </div>
             </div>
             <div className="row">
@@ -156,9 +99,14 @@ export const BulbTitle = ({roomMenu, setRoomMenu}) => {
                         ))
                     }
                     </ul>
-                    <div className="p-2">
-                        <button className="btn btn-primary" onClick={() => (handleOpenModal('editRooms'))} >Editar</button>
-                    </div>
+                    {
+                        (rooms.length > 0) && (
+                            <div className="p-2">
+                                <button className="btn btn-primary" onClick={() => (handleOpenModal('editRooms'))} >Editar</button>
+                            </div>
+                        )
+                    }
+                    
                     
             </div>
         </div>

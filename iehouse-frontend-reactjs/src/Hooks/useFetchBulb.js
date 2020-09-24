@@ -8,7 +8,6 @@ export const useFetchBulb = () => {
         fetch("http://localhost:8080/bulbs")
         .then(resp => resp.json())
         .then(data => {
-            console.log(data);
             setBulb(data);
         })
     }

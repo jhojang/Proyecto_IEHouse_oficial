@@ -1,16 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { Line } from 'react-chartjs-2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 import { faCube } from '@fortawesome/free-solid-svg-icons';
 import { TitleCard } from '../Atoms/TitleCard';
-import { useFetchRoom } from '../../Hooks/useFetchRoom';
-import { useFetchBulb } from '../../Hooks/useFetchBulb';
 import { UseContext } from '../../Context/UseContext';
 
 export const HomeBody = () => {
 
-    const { user, bulbs, rooms } = useContext(UseContext);
+    const { user, bulbs, rooms, setActualPageBody } = useContext(UseContext);
+
+    useEffect(() => {
+        localStorage.setItem('PageBody', '');
+        setActualPageBody(localStorage.getItem('PageBody'));
+    }, [])
 
     const getChartData = (e) => {
         const ctx = e.getContext("2d");

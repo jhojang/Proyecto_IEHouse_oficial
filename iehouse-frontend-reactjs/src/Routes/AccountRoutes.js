@@ -11,6 +11,7 @@ import { NavBar } from '../Components/Organisms/NavBar';
 import { SideBar } from '../Components/Organisms/SideBar';
 
 export const AccountRoutes = ({user, handleLogOut, actualPageBody, setActualPageBody}) => {
+
     return (
         <Router>
             <div class="d-flex bg-white global">

@@ -17,7 +17,10 @@ export const ModalEditRoom = ({showM, handleCloseModal, handleDeleteRoom, rooms}
 
     const handleDelete = (e, idRoom) => {
         e.preventDefault();
-        handleDeleteRoom(idRoom);
+        var confirm = window.confirm("¿Está seguro que deseas eliminar este cuarto? Se eliminarán todos los bombillos pertenecientes a este cuarto");
+        if (confirm === true) {
+            handleDeleteRoom(idRoom);
+        }
     }
 
     return (

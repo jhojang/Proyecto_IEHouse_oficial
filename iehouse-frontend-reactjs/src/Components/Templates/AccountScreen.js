@@ -46,7 +46,7 @@ export const AccountScreen = () => {
     
     return (
         <>
-        <UseContext.Provider value={{user, bulbs, rooms, handleListBulb, handleListRoom}}>
+        <UseContext.Provider value={{user, bulbs, rooms, handleListBulb, handleListRoom, actualPageBody, setActualPageBody}}>
             <AccountRoutes 
                 user={user} 
                 handleLogOut={handleLogOut} 
