@@ -5,7 +5,7 @@ import { useFetchRoom } from '../../Hooks/useFetchRoom';
 
 export const BulbTitle = ({roomMenu, setRoomMenu, bulbs, handleListBulb}) => {
 
-    const {rooms, handleListRoom, handleAddRoom, handleDeleteRoom} = useFetchRoom();
+    const {rooms, handleListRoom, handleAddRoom, handleUpdateRoom, handleDeleteRoom} = useFetchRoom();
 
     useEffect(() => {
         handleListRoom();
@@ -72,7 +72,12 @@ export const BulbTitle = ({roomMenu, setRoomMenu, bulbs, handleListBulb}) => {
                     {
                         (showModal.show === true) && (
                             (showModal.type === 'editRooms' && (
-                                <ModalEditRoom showM={showModal.show} handleCloseModal={handleCloseModal} handleAddRoom={handleAddRoom} handleDeleteRoom={handleDeleteRoom} rooms={rooms} />
+                                <ModalEditRoom 
+                                    showM={showModal.show} 
+                                    handleCloseModal={handleCloseModal} 
+                                    handleDeleteRoom={handleDeleteRoom} 
+                                    handleUpdateRoom={handleUpdateRoom}
+                                    rooms={rooms} />
                             ))
                         )
                     }

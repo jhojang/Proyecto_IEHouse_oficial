@@ -41,11 +41,26 @@ export const useFetchRoom = () => {
         })
     }
 
+    const handleUpdateRoom = (room, idRoom) => {
+        fetch(url + idRoom, {
+            method: 'PUT',
+            body: JSON.stringify(room),
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            handleListRoom();
+        })
+    }
+
     return {
         rooms,
         handleListRoom,
         handleAddRoom,
-        handleDeleteRoom
+        handleDeleteRoom,
+        handleUpdateRoom
     }
 
 }

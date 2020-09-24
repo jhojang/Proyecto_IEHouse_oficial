@@ -6,7 +6,7 @@ import { Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseUser, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-export const ModalEditRoom = ({showM, handleCloseModal, handleDeleteRoom, rooms}) => {
+export const ModalEditRoom = ({showM, handleCloseModal, handleUpdateRoom, handleDeleteRoom, rooms}) => {
 
     const [showRoomForm, setShowRoomForm] = useState(0)
 
@@ -20,6 +20,20 @@ export const ModalEditRoom = ({showM, handleCloseModal, handleDeleteRoom, rooms}
         var confirm = window.confirm("¿Está seguro que deseas eliminar este cuarto? Se eliminarán todos los bombillos pertenecientes a este cuarto");
         if (confirm === true) {
             handleDeleteRoom(idRoom);
+        }
+    }
+
+    const handleSubmit = (e, idRoom) => {
+        e.preventDefault();
+        const roomName = document.querySelector('#roomName').value;
+        if ((roomName.trim()).length == 0) {
+            alert('El campo de nombre está vacío, id: ' + idRoom);
+        } else {
+            const json = {
+                name: roomName
+            }
+            handleUpdateRoom(json, idRoom);
+            setShowRoomForm(0);
         }
     }
 
@@ -37,7 +51,10 @@ export const ModalEditRoom = ({showM, handleCloseModal, handleDeleteRoom, rooms}
                     {
                         rooms.map(room => (
                             (showRoomForm !== room.id) ? (
-                                <form key={room.id} className="card-room border mr-3 d-flex align-items-center mb-2 shadow">
+                                <div 
+                                    key={room.id} 
+                                    className="card-room border mr-3 d-flex align-items-center mb-2 shadow"
+                                >
                                     <span className="icon-room p-2 bg-primary text-white">
                                         <FontAwesomeIcon icon={faHouseUser} />
                                     </span>
@@ -53,15 +70,40 @@ export const ModalEditRoom = ({showM, handleCloseModal, handleDeleteRoom, rooms}
                                     <button className="p-1 mr-2 border-0 bg-white text-size-5" onClick={(e) => handleDelete(e, room.id)}>
                                         <FontAwesomeIcon icon={faTrash} />
                                     </button>
-                                </form>
-                            ) : (
-                                <div key={room.id} className="d-flex flex-column w-100 bg-white shadow mb-2 p-3">
-                                    <input type="text" name="roomName" defaultValue={room.name} id="input-edit-name" className="input-edit-name form-control border-0 mb-2" placeholder="Ingrese el nombre del cuarto" autoFocus={true} />
-                                    <div className="d-flex justify-content-end">
-                                        <input type="submit" value="Enviar" className="btn btn-primary mr-2" />
-                                        <button type="submit" className="btn btn-primary" onClick={(e) => handleFormToggle(e, false)} >Cancelar</button>
-                                    </div>
                                 </div>
+                            ) : (
+                                <form
+                                    key={room.id}
+                                    className="d-flex flex-column w-100 bg-white shadow mb-2 p-3"
+                                    onSubmit={(e) => (
+                                        handleSubmit(e, room.id)
+                                    )}
+                                >
+                                    <input 
+                                        type="text"
+                                        id="roomName"
+                                        name="roomName" 
+                                        defaultValue={room.name}
+                                        className="input-edit-name form-control border-0 mb-2" 
+                                        placeholder="Ingrese el nombre del cuarto" 
+                                        autoFocus={true} 
+                                    />
+                                    <div className="d-flex justify-content-end">
+                                        <input 
+                                            type="submit" 
+                                            value="Enviar" 
+                                            className="btn btn-primary mr-2"
+                                        />
+                                        <button
+                                        type="submit"
+                                        className="btn btn-primary" 
+                                        onClick={(e) => (
+                                            handleFormToggle(e, 0)
+                                        )}>
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </form>
                             )
                         ))
                     }
