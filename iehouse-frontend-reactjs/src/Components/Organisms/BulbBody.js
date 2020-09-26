@@ -17,7 +17,7 @@ export default function BulbBody() {
     
     const [roomMenu, setRoomMenu] = useState(0);
 
-    const { bulbs, handleListBulb } = useFetchBulb();
+    const { bulbs, handleListBulb, handleStateBulb, handleDeleteBulb } = useFetchBulb();
     const { rooms, handleListRoom } = useFetchRoom();
 
     useEffect(() => {
@@ -49,7 +49,7 @@ export default function BulbBody() {
                     <div className="col-9 d-flex flex-wrap">
                         {
                             iterBulbs.map(iterBulb => {
-                                return <Bulb key={iterBulb.id} name={iterBulb.name} />
+                                return <Bulb key={iterBulb.id} name={iterBulb.name} id={iterBulb.id} state={iterBulb.state} handleStateBulb={handleStateBulb} handleDeleteBulb={handleDeleteBulb} />
                             })
                         }
                     </div>

@@ -35,10 +35,44 @@ export const useFetchBulb = () => {
         })
     }
 
+    const handleStateBulb = (id, state) => {
+        const newState = {
+            state
+        }
+
+        fetch(url+id, {
+            method: 'PUT',
+            body: JSON.stringify(newState),
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data);
+            handleListBulb();
+        })
+
+    }
+
+    const handleDeleteBulb = (idBulb) => {
+        fetch(url + idBulb, {
+            method: 'DELETE',
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        .then(data => {
+            handleListBulb();
+        })
+    }
+
     return {
         bulbs,
         handleListBulb,
-        handleCreateBulb
+        handleCreateBulb,
+        handleStateBulb,
+        handleDeleteBulb
     }
 
 
