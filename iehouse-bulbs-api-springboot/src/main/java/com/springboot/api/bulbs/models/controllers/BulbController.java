@@ -58,10 +58,10 @@ public class BulbController {
         return Bulblist;
     }
 
-    @GetMapping("/bulbsp")
-    public List<Integer> listP() {
-        return bulbService.findAllP();
-    }
+    // @GetMapping("/bulbsp")
+    // public List<Integer> listP() {
+    //     return bulbService.findAllP();
+    // }
 
     @GetMapping("/bulbs/{id}")
     public Bulb findById(@PathVariable Integer id) {
@@ -82,7 +82,16 @@ public class BulbController {
         Room room = roomService.findById(idRoom);
         bulb.setRoom(room);
         return bulbService.save(bulb);
-        // return bulb.getUser();
+    }
+
+    @PutMapping("/bulbs/{idBulb}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Bulb setState(@RequestBody Bulb bulb, @PathVariable Integer idBulb) {
+        Bulb currentBulb = bulbService.findById(idBulb);
+        currentBulb.setState(bulb.getState());
+        currentBulb = bulbService.save(currentBulb);
+        currentBulb.setUser(null);
+        return currentBulb;
     }
 
     @PutMapping("/bulbs/idBulb/{idBulb}/idRoom/{idRoom}")
