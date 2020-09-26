@@ -4,6 +4,7 @@ export const useFetchUser = (action) => {
 
     const [csrfToken, setCsrfToken] = useState('');
     const [respStatus, setRespStatus] = useState({});
+    const [users, setUsers] = useState([]);
 
     const traerCsrfToken = () => {
         fetch('http://iehouse-auth-laravel.test/api/show-token')
@@ -183,12 +184,25 @@ export const useFetchUser = (action) => {
 
     }
 
+
+    const handleListUser = () => {
+
+        fetch("http://localhost:8080/" + action)
+        .then(resp => resp.json())
+        .then(data => {
+            setUsers(data);
+        })
+
+    }
+
     return {
-        respStatus: respStatus,
-        handleCreate: handleCreate,
-        handleLogin: handleLogin,
-        handleGrantedAccess: handleGrantedAccess,
-        traerCsrfToken: traerCsrfToken
+        users,
+        handleListUser,
+        respStatus,
+        handleCreate,
+        handleLogin,
+        handleGrantedAccess,
+        traerCsrfToken
     };
 
 }

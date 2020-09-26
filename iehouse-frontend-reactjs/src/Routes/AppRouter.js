@@ -9,8 +9,8 @@ import { IndexScreen } from '../Components/Templates/IndexScreen';
 import { LoginScreen } from '../Components/Templates/LoginScreen';
 import { RegisterScreen } from '../Components/Templates/RegisterScreen';
 import { AccountScreen } from '../Components/Templates/AccountScreen';
-import { RequireAuth } from '../Helpers/RequireAuth';
-import { RemoveAuth } from '../Helpers/RemoveAuth';
+import { RequireAuth } from '../AuthProtect/RequireAuth';
+import { RemoveAuth } from '../AuthProtect/RemoveAuth';
 
 export const AppRouter = () => {
     return (

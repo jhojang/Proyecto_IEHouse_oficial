@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
-import Select from 'react-select';
 import bulbVector from '../../svg/bulbVector.svg';
-import avatar from '../../img/avatar.jpg';
 import { Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseUser, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-export const ModalEditRoom = ({showM, handleCloseModal, handleUpdateRoom, handleDeleteRoom, rooms}) => {
+export const ModalEditRoom = ({showModal, handleCloseModal, handleUpdateRoom, handleDeleteRoom, rooms}) => {
 
     const [showRoomForm, setShowRoomForm] = useState(0)
 
@@ -39,7 +37,7 @@ export const ModalEditRoom = ({showM, handleCloseModal, handleUpdateRoom, handle
 
     return (
         <>
-            <Modal className="modal modal-bulb" show={showM} onHide={handleCloseModal}>
+            <Modal className="modal modal-bulb" show={showModal} onHide={handleCloseModal}>
             <Modal.Header className="text-size-8 border-0 pl-5 border-bottom" closeButton>Editar Cuartos</Modal.Header>
             <Modal.Body>
             <div className="row">
