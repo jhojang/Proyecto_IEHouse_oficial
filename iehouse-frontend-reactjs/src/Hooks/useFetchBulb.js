@@ -4,6 +4,8 @@ export const useFetchBulb = () => {
     
     const [bulbs, setBulb] = useState([])
 
+    const [singleBulb, setSingleBulb] = useState({})
+
     const url = "http://localhost:8080/bulbs/";
 
     const handleListBulb = () => {
@@ -11,6 +13,14 @@ export const useFetchBulb = () => {
         .then(resp => resp.json())
         .then(data => {
             setBulb(data);
+        })
+    }
+
+    const handleGetBulbById = (idBulb) => {
+        fetch(url + idBulb)
+        .then(resp => resp.json())
+        .then(data => {
+            setSingleBulb(data);
         })
     }
 
@@ -35,6 +45,8 @@ export const useFetchBulb = () => {
         })
     }
 
+    
+
     const handleStateBulb = (id, state) => {
         const newState = {
             state
@@ -55,6 +67,29 @@ export const useFetchBulb = () => {
 
     }
 
+
+    const handleUpdateBulb = (bulbName, users, idBulb, idRoom) => {
+        const updatedBulb = {
+            name: bulbName,
+            user: users
+        }
+
+        console.log(url + "idBulb/" + idBulb + "/idRoom/" + idRoom);
+
+        fetch(url + "idBulb/" + idBulb + "/idRoom/" + idRoom, {
+            method: 'PUT',
+            body: JSON.stringify(updatedBulb),
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        .then(data => {
+            handleListBulb();
+            console.log(data);
+        })
+    }
+
+
     const handleDeleteBulb = (idBulb) => {
         fetch(url + idBulb, {
             method: 'DELETE',
@@ -69,8 +104,11 @@ export const useFetchBulb = () => {
 
     return {
         bulbs,
+        singleBulb,
         handleListBulb,
+        handleGetBulbById,
         handleCreateBulb,
+        handleUpdateBulb,
         handleStateBulb,
         handleDeleteBulb
     }

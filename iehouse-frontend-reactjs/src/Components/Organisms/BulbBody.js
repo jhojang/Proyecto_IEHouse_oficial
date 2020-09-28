@@ -5,6 +5,7 @@ import { Horary } from '../Molecules/Horary'
 import { useFetchRoom } from '../../Hooks/useFetchRoom';
 import { UseContext } from '../../Context/UseContext';
 import { useFetchBulb } from '../../Hooks/useFetchBulb';
+import { ModalEditBulb } from '../Molecules/ModalEditBulb';
 
 export default function BulbBody() {
 
@@ -19,6 +20,31 @@ export default function BulbBody() {
 
     const { bulbs, handleListBulb, handleStateBulb, handleDeleteBulb } = useFetchBulb();
     const { rooms, handleListRoom } = useFetchRoom();
+
+    const [showModal, setShowModal] = useState({
+        type: 'none',
+        show: false
+    });
+
+    const [singleBulb, setSingleBulb] = useState({})
+
+    const handleOpenModal = (type, id) => {
+        bulbs.forEach(bulb => (
+            (id === bulb.id) && setSingleBulb(bulb)
+        ));
+        setShowModal({
+            type: type,
+            show: true
+        });
+    }
+
+    const handleCloseModal = () => {
+        setShowModal({
+            type: 'none',
+            show: false
+        });
+        handleListBulb();
+    }
 
     useEffect(() => {
         handleListBulb();
@@ -48,9 +74,16 @@ export default function BulbBody() {
                 <div className="row p-2 pt-3">
                     <div className="col-9 d-flex flex-wrap">
                         {
-                            iterBulbs.map(iterBulb => {
-                                return <Bulb key={iterBulb.id} name={iterBulb.name} id={iterBulb.id} state={iterBulb.state} handleStateBulb={handleStateBulb} handleDeleteBulb={handleDeleteBulb} />
-                            })
+                            iterBulbs.map(iterBulb => (
+                                 <Bulb key={iterBulb.id} 
+                                    name={iterBulb.name}
+                                    id={iterBulb.id}
+                                    state={iterBulb.state}
+                                    handleStateBulb={handleStateBulb}
+                                    handleDeleteBulb={handleDeleteBulb}
+                                    handleOpenModal={handleOpenModal}
+                                />
+                            ))
                         }
                     </div>
                     <div className="col-3 m-0 pl-0">
@@ -58,6 +91,18 @@ export default function BulbBody() {
                     </div>
                 </div>
             </div>
+            {
+                (showModal.show === true) && (
+                    (showModal.type === 'editBulb' && (
+                        <ModalEditBulb 
+                            showModal={showModal.show} 
+                            handleCloseModal={handleCloseModal}
+                            rooms={rooms}
+                            singleBulb={singleBulb}
+                        />
+                    ))
+                )
+            }
         </>
     )
 }

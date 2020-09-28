@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-export const Bulb = ({name, id, state, handleStateBulb, handleDeleteBulb}) => {
+export const Bulb = ({name, id, state, handleStateBulb, handleDeleteBulb, handleOpenModal}) => {
 
     const handleToggleState = (id, state) => {
         state = (state === false) ? true : false;
@@ -19,7 +19,7 @@ export const Bulb = ({name, id, state, handleStateBulb, handleDeleteBulb}) => {
                 </div>
             </button>
             <div className="d-flex justify-content-end">
-                <button className="border-0 mr-1 p-1"><FontAwesomeIcon icon={faCog} /></button>
+                <button onClick={() => handleOpenModal('editBulb', id)} className="border-0 mr-1 p-1"><FontAwesomeIcon icon={faCog} /></button>
                 <button onClick={() => handleDeleteBulb(id)} className="border-0 p-1"><FontAwesomeIcon icon={faTrash} /></button>
             </div>
         </div>
