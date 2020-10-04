@@ -65,7 +65,15 @@ public class BulbController {
 
     @GetMapping("/bulbs/{id}")
     public Bulb findById(@PathVariable Integer id) {
-        return bulbService.findById(id);
+        Bulb currentBulb = bulbService.findById(id);
+        List<User> currentUserList = currentBulb.getUser();
+        User currentUser = new User();
+        for (int i = 0; i < currentUserList.size(); i++) {
+            currentUser = currentUserList.get(i);
+            currentUser.setBulb(null);
+        }
+
+        return currentBulb;
     }
 
     // @PostMapping(path="/bulbs/{idRoom}")
@@ -100,7 +108,7 @@ public class BulbController {
         Room room = roomService.findById(idRoom);
         Bulb currentBulb = bulbService.findById(idBulb);
         currentBulb.setName(bulb.getName());
-        currentBulb.setState(bulb.getState());
+        // currentBulb.setState(bulb.getState());
         currentBulb.setUser(bulb.getUser());
         currentBulb.setRoom(room);
         return bulbService.save(currentBulb);

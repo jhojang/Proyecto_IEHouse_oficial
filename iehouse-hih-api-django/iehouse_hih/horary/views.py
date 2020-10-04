@@ -7,7 +7,7 @@ from .serializers import HorarySerializer
 
 # Create your views here.
 
-class HistoryGetPost(APIView):
+class HoraryGetPost(APIView):
 
     def get(self, request):
         horaryList = Horary.objects.all()
@@ -21,7 +21,7 @@ class HistoryGetPost(APIView):
             return Response(newHorary.data, status = status.HTTP_201_CREATED)
         return Response(newHorary.errors, status = status.HTTP_400_BAD_REQUEST)
 
-class HistoryGetByIdUpdateDelete(APIView):
+class HoraryGetByIdUpdateDelete(APIView):
 
     def get_horary(self, id):
         try:

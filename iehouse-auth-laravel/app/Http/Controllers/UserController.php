@@ -164,10 +164,10 @@ class UserController extends Controller
     public function grantedAccess(Request $request) {
 
         $token = $request->header('Authorization');
+        $token = str_replace('"', '', $token);
         $jwtAuth = new \JwtAuth();
         $checkToken = $jwtAuth->checkToken($token, true);
         
-
         return response()->json($checkToken);
 
     }
