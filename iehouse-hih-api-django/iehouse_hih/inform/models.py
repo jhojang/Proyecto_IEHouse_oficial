@@ -9,7 +9,10 @@ from django.db import models
 
 
 class Bombillo(models.Model):
-    name = models.CharField(unique=True, max_length=255, blank=True, null=True)
+    name = models.CharField(
+        unique=True,
+        max_length=255
+    )
     state = models.BooleanField()
     id_room = models.ForeignKey(
         'Room', 
