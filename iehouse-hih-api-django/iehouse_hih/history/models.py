@@ -9,7 +9,10 @@ from django.db import models
 
 
 class Bombillo(models.Model):
-    name = models.CharField(unique=True, max_length=255, blank=True, null=True)
+    name = models.CharField(
+        unique=True,
+        max_length=255
+    )
     state = models.BooleanField()
     id_room = models.ForeignKey(
         'Room', 
@@ -39,6 +42,7 @@ class Bombillo(models.Model):
 class History(models.Model):
     hora_inicio = models.TimeField()
     hora_fin = models.TimeField()
+    date = models.DateTimeField(auto_now_add=True)
     id_bombillo = models.ForeignKey(
         Bombillo, 
         models.DO_NOTHING, 
@@ -51,7 +55,7 @@ class History(models.Model):
         db_table = 'history'
 
     def __str__(self):
-        return self.hora_inicio
+        return 'History ' + str(self.date)
 
 
 # class Horary(models.Model):
