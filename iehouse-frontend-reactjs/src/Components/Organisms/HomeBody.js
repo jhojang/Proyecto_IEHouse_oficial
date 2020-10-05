@@ -21,12 +21,14 @@ export const HomeBody = () => {
         gradient.addColorStop(0, 'rgba(25,142,255,1)');   
         gradient.addColorStop(1, 'rgba(25,142,255,0)');
 
+        
+
         return {
             labels: ["02:00","04:00","06:00","08:00","10:00","12:00","14:00","16:00","18:00","20:00","22:00","00:00"],
             labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
             datasets: [{
                 label: 'level of thiccness',
-                data: [32, 38, 45, 40, 69, 55, 76],
+                data: [32, 38, 45, 40, 69, 55, 100],
                 backgroundColor: gradient,
                 borderWidth: 2,
                 borderColor: 'rgb(25, 140, 255)',

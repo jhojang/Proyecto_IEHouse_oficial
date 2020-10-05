@@ -87,7 +87,7 @@ export default function BulbBody() {
                         }
                     </div>
                     <div className="col-3 m-0 pl-0">
-                        <Horary />
+                        <Horary showModal={showModal.show} handleOpenModal={handleOpenModal} bulbs={bulbs} />
                     </div>
                 </div>
             </div>
