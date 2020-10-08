@@ -35,6 +35,7 @@ export const LoginForm = ({handleSubmit, validator}) => {
             </div>
             <div className="mt-3 text-center">
                 <p className="m-0">¿No tienes cuenta? <Link to="/register">Registrarse</Link></p>
+                <p className="m-0"><Link to="/forgot-password">¿Olvidaste la contraseña?</Link></p>
             </div>
         </form>
     )

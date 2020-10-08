@@ -13,6 +13,15 @@ export const HomeBody = () => {
     useEffect(() => {
         localStorage.setItem('PageBody', '');
         setActualPageBody(localStorage.getItem('PageBody'));
+
+        const fechaComoCadena = "2020-09-30 23:37:22"; // día lunes
+        const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo',];
+        const numeroDia = new Date(fechaComoCadena).getDay();
+        const nombreDia = dias[numeroDia];
+        console.log("Nombre de día de la semana: ", nombreDia);
+        const fechaHoy = new Date();
+        console.log(fechaHoy);
+
     }, [])
 
     const getChartData = (e) => {
@@ -21,7 +30,7 @@ export const HomeBody = () => {
         gradient.addColorStop(0, 'rgba(25,142,255,1)');   
         gradient.addColorStop(1, 'rgba(25,142,255,0)');
 
-        
+
 
         return {
             labels: ["02:00","04:00","06:00","08:00","10:00","12:00","14:00","16:00","18:00","20:00","22:00","00:00"],
@@ -52,7 +61,7 @@ export const HomeBody = () => {
                     <div className="w-50 p-0 col mr-1 d-flex flex-column">
                         <div className="bg-white mb-2 p-3 h-50 d-flex flex-column justify-content-center align-items-center">
                             <h2 className="text-size-8 text-primary">Bienvenido, {user.username}</h2>
-                            dfhgd
+                            
                         </div>
                         <div className="row m-0 p-0 h-50">
 

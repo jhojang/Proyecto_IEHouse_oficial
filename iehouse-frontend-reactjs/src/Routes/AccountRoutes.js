@@ -6,6 +6,7 @@ import {
     // Redirect
 } from "react-router-dom";
 import BulbBody from '../Components/Organisms/BulbBody';
+import { Configuration } from '../Components/Organisms/Configuration';
 import { HomeBody } from '../Components/Organisms/HomeBody';
 import { NavBar } from '../Components/Organisms/NavBar';
 import { SideBar } from '../Components/Organisms/SideBar';
@@ -27,6 +28,7 @@ export const AccountRoutes = ({user, handleLogOut, actualPageBody, setActualPage
                     <Switch>
                         <Route exact path='/account/bulbs' component={BulbBody} />
                         <Route exact path='/account/' component={HomeBody} />
+                        <Route exact path='/account/configuration' component={Configuration} />
                     </Switch>
                 </div>
             </div>

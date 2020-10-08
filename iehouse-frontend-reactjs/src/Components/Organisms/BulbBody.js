@@ -6,6 +6,8 @@ import { useFetchRoom } from '../../Hooks/useFetchRoom';
 import { UseContext } from '../../Context/UseContext';
 import { useFetchBulb } from '../../Hooks/useFetchBulb';
 import { ModalEditBulb } from '../Molecules/ModalEditBulb';
+import { useFetchHistory } from '../../Hooks/useFetchHistory';
+import { useFetchInform } from '../../Hooks/useFetchInform';
 
 export default function BulbBody() {
 
@@ -20,6 +22,10 @@ export default function BulbBody() {
 
     const { bulbs, handleListBulb, handleStateBulb, handleDeleteBulb } = useFetchBulb();
     const { rooms, handleListRoom } = useFetchRoom();
+
+    const { handleCreateHistory, handleUpdateHistory } = useFetchHistory();
+
+    const { informs, handleListInform } = useFetchInform();
 
     const [showModal, setShowModal] = useState({
         type: 'none',
@@ -82,6 +88,10 @@ export default function BulbBody() {
                                     handleStateBulb={handleStateBulb}
                                     handleDeleteBulb={handleDeleteBulb}
                                     handleOpenModal={handleOpenModal}
+                                    handleCreateHistory={handleCreateHistory}
+                                    handleUpdateHistory={handleUpdateHistory}
+                                    handleListInform={handleListInform}
+                                    informs={informs}
                                 />
                             ))
                         }

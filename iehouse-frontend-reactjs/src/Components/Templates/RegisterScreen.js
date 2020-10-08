@@ -5,7 +5,7 @@ import { RegisterForm } from '../Molecules/RegisterForm';
 
 export const RegisterScreen = () => {
 
-    const [validator, setValidator] = useState({
+    const [validator, setValidator] = useState({ // jsx: javasscript xml
         errores: {
             username: '',
             name: '',

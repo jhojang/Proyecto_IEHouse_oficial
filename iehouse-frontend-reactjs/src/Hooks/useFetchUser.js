@@ -195,6 +195,170 @@ export const useFetchUser = (action) => {
 
     }
 
+    const handleForgotPassword = (json, setValidator, forgot_form, setShowModal) => {
+
+        const formData = new FormData();
+        formData.append('json', JSON.stringify(json));
+
+        console.log(json);
+
+        fetch('http://iehouse-auth-laravel.test/api/forgot', {
+            method: 'POST',
+            body: formData,
+            header: {
+                // 'X-CSRF-TOKEN': csrfToken,
+                'Content-Type' : 'application/x-www-form-urlencoded'
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data);
+            let errores = {
+                email: ''
+            }
+            if (data.status === 'error') {
+                    for (let [key, value] of Object.entries(data.error)) {
+                        // errores = {
+                        //     ...errores,
+                        //     [key]: value[0]
+                        // }
+
+                        
+
+                        if (value[0] === 'The email field is required.'){
+                            errores = {
+                                ...errores,
+                                [key]: 'El correo es requerido'
+                            }
+                        } else if (value[0] === 'The email must be a valid email address.'){
+                            errores = {
+                                ...errores,
+                                [key]: 'El correo ingresado no es válido'
+                            }
+                        } else {
+                            errores = {
+                                ...errores,
+                                [key]: value[0]
+                            }
+                        }
+                        
+                    }
+                    setValidator(({
+                        errores,
+                        show: true
+                    }));
+            } else if (data.status === 'success') {
+                setShowModal({
+                    show: true,
+                    message: data.message
+                });
+                setValidator({
+                    errores,
+                    show: false
+                });
+                forgot_form.reset();
+            }
+            
+        })
+
+    }
+
+
+    const handleRecovePassword = (json, setValidator, recove_form, setShowModal) => {
+
+        const formData = new FormData();
+        formData.append('json', JSON.stringify(json));
+
+        console.log(json);
+
+        fetch('http://iehouse-auth-laravel.test/api/recove', {
+            method: 'POST',
+            body: formData,
+            header: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Content-Type' : 'application/x-www-form-urlencoded'
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data);
+            let errores = {
+                password: ''
+            }
+            if (data.status === 'error') {
+                for (let [key, value] of Object.entries(data.error)) {
+                    errores = {
+                        ...errores,
+                        [key]: value[0]
+                    }
+
+                    
+                    if (value[0] === 'The password field is required.'){
+                        errores = {
+                            ...errores,
+                            [key]: 'La contraseña es requerida'
+                        }
+                    } else if (value[0] === 'The email must be a valid email address.'){
+                        errores = {
+                            ...errores,
+                            [key]: 'El correo ingresado no es válido'
+                        }
+                    } else {
+                        errores = {
+                            ...errores,
+                            [key]: value[0]
+                        }
+                    }
+                    
+                }
+                setValidator({
+                    errores,
+                    show: true
+                });
+            } else if (data.status === 'success') {
+                setShowModal({
+                    show: true,
+                    message: data.message
+                });
+                setValidator({
+                    errores,
+                    show: false
+                });
+                recove_form.reset();
+            }
+            
+        })
+
+    }
+
+
+
+    const handleCheckRecoveToken = (json, setValidRecoveToken) => {
+
+        const formData = new FormData();
+        formData.append('json', JSON.stringify(json));
+
+        console.log(json);
+
+        fetch('http://iehouse-auth-laravel.test/api/check-recove', {
+            method: 'POST',
+            body: formData,
+            header: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Content-Type' : 'application/x-www-form-urlencoded'
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data);
+            if (data.status === 'error') {
+                setValidRecoveToken(false);
+            } 
+        })
+
+    }
+
+
     return {
         users,
         handleListUser,
@@ -202,6 +366,9 @@ export const useFetchUser = (action) => {
         handleCreate,
         handleLogin,
         handleGrantedAccess,
+        handleForgotPassword,
+        handleRecovePassword,
+        handleCheckRecoveToken,
         traerCsrfToken
     };
 

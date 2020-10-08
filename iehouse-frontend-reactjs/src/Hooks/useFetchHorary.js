@@ -13,6 +13,7 @@ export const useFetchHorary = () => {
         })
         .then(resp => resp.json())
         .then(data => {
+            console.log(data);
             setHorarys(data);
         })
     }

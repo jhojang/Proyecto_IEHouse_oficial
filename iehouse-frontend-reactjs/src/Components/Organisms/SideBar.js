@@ -2,8 +2,8 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faBolt, faLightbulb as faSolidBulb, faCog, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import avatar from '../../img/avatar.jpg';
-import logoPrueba from '../../img/logoPrueba.jpg';
-import { Link, NavLink } from 'react-router-dom';
+import logo from '../../img/LOGO.png';
+import { Link } from 'react-router-dom';
 
 export const SideBar = ({user, actualPageBody, setActualPageBody}) => {
 
@@ -15,8 +15,11 @@ export const SideBar = ({user, actualPageBody, setActualPageBody}) => {
     return (
         <div className="bg-white border-right" id="sidebar-wrapper">
             <div className="sidebar-heading border-bottom sticky-top bg-white">
-                Lala
-                <img className="logo" src={ logoPrueba } alt="IE House" />
+                <span className="text-white">
+                    Lala
+                </span>
+                
+                <img className="logo" src={ logo } alt="IE House" />
             </div>
             <div className="user-hud border-bottom bg-white d-flex align-items-center justify-content-center flex-column ml-auto mr-auto m-0 sticky-top-2">
                 <img src={ avatar } />
@@ -27,7 +30,7 @@ export const SideBar = ({user, actualPageBody, setActualPageBody}) => {
                 <Link to="/account/" onClick={() => handleActiveNavLink('')} className={`list-group-item ${actualPageBody === '' && "list-group-item-active"} mb-2 p-2 rounded-lg font-weight-bold`}><span className="aside-icon text-success"><FontAwesomeIcon icon={faHome} /></span><span className="pl-2">Inicio</span></Link>
                 <Link to="/account/bulbs" onClick={() => handleActiveNavLink('bulbs')} className={`list-group-item ${actualPageBody === 'bulbs' && "list-group-item-active"} mb-2 p-2 rounded-lg  font-weight-bold`}><span className="aside-icon text-warning"><FontAwesomeIcon icon={faSolidBulb} /></span><span className="pl-2">Bombillos</span></Link>
                 <Link to="/account/energy" onClick={() => handleActiveNavLink('energy')} className={`list-group-item ${actualPageBody === 'energy' && "list-group-item-active"} mb-2 p-2 rounded-lg  font-weight-bold`}><span className="aside-icon text-primary"><FontAwesomeIcon icon={faBolt} /></span><span className="pl-2">Informe energía</span></Link>
-                <a href="#" className="list-group-item list-group-item-action mb-2 p-2 rounded-lg  font-weight-bold"><span className="aside-icon text-secondary"><FontAwesomeIcon icon={faCog} /></span><span className="pl-2">Configuración</span></a>
+                <Link to="/account/configuration" onClick={() => handleActiveNavLink('configuration')} className={`list-group-item ${actualPageBody === 'configuration' && "list-group-item-active"} mb-2 p-2 rounded-lg  font-weight-bold`}><span className="aside-icon text-secondary"><FontAwesomeIcon icon={faCog} /></span><span className="pl-2">Configuración</span></Link>
                 <a href="#" className="list-group-item list-group-item-action mb-2 p-2 rounded-lg  font-weight-bold"><span className="aside-icon text-danger"><FontAwesomeIcon icon={faEnvelope} /></span><span className="pl-2">Contacto</span></a>
             </div>
         </div>

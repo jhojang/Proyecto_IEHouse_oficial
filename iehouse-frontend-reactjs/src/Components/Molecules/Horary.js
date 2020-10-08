@@ -13,7 +13,16 @@ export const Horary = ({bulbs}) => {
 
     useEffect(() => {
         handleListHorary();
+
+        functionPrueba();
+
     }, [])
+
+    horarys.forEach(horary => {
+            // console.log((horary.starts_at).substr(0, 10));
+            // console.log((horary.starts_at).substr(11, 8));
+            const fechaStr = (horary.starts_at).substr(0, 10) + (horary.starts_at).substr(11, 8);
+        })
 
     
 
@@ -53,7 +62,7 @@ export const Horary = ({bulbs}) => {
         const minutes = date.getMinutes();
         const seconds = date.getSeconds();
 
-        console.log(year + "-" + month + "-" + day + " " + hours + "-" + minutes + "-" + seconds);
+        console.log(year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds);
     }
 
 
